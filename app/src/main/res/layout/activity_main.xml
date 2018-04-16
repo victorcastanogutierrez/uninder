@@ -24,4 +24,5 @@
         android:layout_gravity="start"
         design:menu="@menu/bottom_nav_items" />
 
+
 </LinearLayout>
