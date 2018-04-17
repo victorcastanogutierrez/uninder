@@ -13,8 +13,10 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.uninder.uninder.MainActivity
 import com.uninder.uninder.R
 import kotlinx.android.synthetic.main.card_login.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 
@@ -76,7 +78,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
     override fun goToConfigUser(user : FirebaseUser) {
 
-        toast("Ahora abriríamos otra activity")
+        startActivity<MainActivity>()
     }
 
 
