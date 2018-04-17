@@ -26,8 +26,7 @@ const val WEB_CLIENT_ID = "339115481307-63u0qp970ugnec1hu9olkp4suirah0t9.apps.go
 
 
 class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, LoginContract.View {
-
-
+    
     lateinit var mAuth: FirebaseAuth
 
     lateinit var mGoogleApiClient: GoogleApiClient
@@ -75,7 +74,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         toast("Ahora cerrariamos la activity")
     }
 
-    override fun goToConfigUser() {
+    override fun goToConfigUser(user : FirebaseUser) {
 
         toast("Ahora abriríamos otra activity")
     }

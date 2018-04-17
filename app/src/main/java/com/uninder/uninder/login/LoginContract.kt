@@ -3,6 +3,7 @@ package com.uninder.uninder.login
 import android.content.Intent
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 interface LoginContract {
@@ -22,7 +23,7 @@ interface LoginContract {
 
         fun showError()
 
-        fun goToConfigUser()
+        fun goToConfigUser(user: FirebaseUser)
 
         fun login()
 

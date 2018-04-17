@@ -32,10 +32,9 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Sign in success
                         Log.e(TAG, "signInWithCredential: Success!")
-                        val user = mAuth!!.currentUser
-                        this.view.goToConfigUser()
+                        val user = mAuth.currentUser
+                        this.view.goToConfigUser(user!!)
                     } else {
                         // Sign in fails
                         Log.w(TAG, "signInWithCredential: Failed!", task.exception)
@@ -43,6 +42,8 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
                     }
                 }
     }
+
+
 
 
     override fun loginToFirebase() {
