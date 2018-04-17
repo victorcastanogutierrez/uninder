@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity(),  GoogleApiClient.OnConnectionFailedLis
 
         mAuth = FirebaseAuth.getInstance()
 
-        login.setOnClickListener({signIn()})
-        logout.setOnClickListener({signOut()})
+        //login.setOnClickListener({signIn()})
+        //logout.setOnClickListener({signOut()})
     }
 
     override fun onStart() {
