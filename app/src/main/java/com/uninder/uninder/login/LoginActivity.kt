@@ -47,6 +47,8 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         presenter = LoginPresenter(this)
 
         login.setOnClickListener({ login() })
+
+        supportActionBar?.hide()
     }
 
 
