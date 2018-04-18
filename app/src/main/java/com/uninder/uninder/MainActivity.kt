@@ -1,36 +1,56 @@
 package com.uninder.uninder
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.card_person.*
-import android.support.v4.graphics.drawable.DrawableCompat.clearColorFilter
-import android.widget.ImageButton
-import android.view.MotionEvent
-import android.graphics.PorterDuff
-import android.view.View
-import android.view.View.OnTouchListener
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.toast
+import android.view.MenuItem
+import com.uninder.uninder.findPeople.FindPeopleFragment
+import com.uninder.uninder.getMatches.MatchesFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FindPeopleFragment.OnFindPeopleInteractionListener,
+        MatchesFragment.OnGetMatchesInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        likeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this, R.anim.like_button)) }
-        dislikeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this, R.anim.dislike_button)) }
+        initialize()
+    }
 
+    private fun initialize() {
+        navigation.selectedItemId = R.id.menu_search
+        onSelectedMenuBottom()
+        supportFragmentManager.beginTransaction().add(mainContainer.id, FindPeopleFragment()).commit()
 
     }
 
-    fun addAnimation(view: View, animation: Animation) {
+    private fun onSelectedMenuBottom() {
 
-        view.animation = animation
-        view.startAnimation(animation)
+
+        navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_matches -> changeFragment(MatchesFragment(), it)
+                R.id.menu_search -> changeFragment(FindPeopleFragment(), it)
+                R.id.menu_account -> changeFragment(null!!, it)
+                else -> changeFragment(FindPeopleFragment(), it)
+            }
+        }
+    }
+
+    private fun changeFragment(fragment: Fragment, menuItem: MenuItem): Boolean {
+        menuItem.isEnabled = true
+        supportFragmentManager.beginTransaction().replace(mainContainer.id, fragment).commit()
+        return true
+
+    }
+
+    override fun onLoadMatches() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onLoadPeople() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 
