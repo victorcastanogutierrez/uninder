@@ -9,6 +9,8 @@ import android.view.MotionEvent
 import android.graphics.PorterDuff
 import android.view.View
 import android.view.View.OnTouchListener
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast
 
@@ -19,10 +21,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+        likeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this, R.anim.like_button)) }
+        dislikeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this, R.anim.dislike_button)) }
+
+
     }
 
+    fun addAnimation(view: View, animation: Animation) {
 
-
+        view.animation = animation
+        view.startAnimation(animation)
+    }
 
 
 }
