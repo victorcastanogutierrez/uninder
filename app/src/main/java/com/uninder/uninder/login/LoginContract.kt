@@ -14,7 +14,8 @@ interface LoginContract {
 
         fun getGoogleLoginResult(result: GoogleSignInResult,mAuth: FirebaseAuth)
 
-        fun loginToFirebase()
+
+        fun haveLogedBefore(mAuth: FirebaseAuth)
 
     }
 

@@ -9,6 +9,15 @@ import org.jetbrains.anko.toast
 
 
 class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
+    override fun haveLogedBefore(mAuth: FirebaseAuth) {
+
+        val user = mAuth.currentUser
+        if (user != null) {
+            Log.v("damn",user.toString())
+            this.view.goToConfigUser(user)
+        }
+
+    }
 
 
     override fun getGoogleLoginResult(result: GoogleSignInResult, mAuth: FirebaseAuth) {
@@ -41,13 +50,6 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
                         this.view.showError()
                     }
                 }
-    }
-
-
-
-
-    override fun loginToFirebase() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 

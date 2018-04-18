@@ -44,11 +44,17 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
         mAuth = FirebaseAuth.getInstance()
 
+
         presenter = LoginPresenter(this)
 
         login.setOnClickListener({ login() })
 
         supportActionBar?.hide()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.haveLogedBefore(this.mAuth);
     }
 
 

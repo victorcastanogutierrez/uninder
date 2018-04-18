@@ -15,6 +15,13 @@
         android:layout_weight="1"
         android:background="#f1f1f1">
 
+        <include
+            layout="@layout/card_person"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp" />
+
+
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
