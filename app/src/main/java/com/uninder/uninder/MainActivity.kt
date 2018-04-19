@@ -8,8 +8,7 @@ import com.uninder.uninder.findPeople.FindPeopleFragment
 import com.uninder.uninder.getMatches.MatchesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), FindPeopleFragment.OnFindPeopleInteractionListener,
-        MatchesFragment.OnGetMatchesInteractionListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +44,6 @@ class MainActivity : AppCompatActivity(), FindPeopleFragment.OnFindPeopleInterac
 
     }
 
-    override fun onLoadMatches() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onLoadPeople() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 
 }
