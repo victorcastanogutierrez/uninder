@@ -1,28 +1,35 @@
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="Preferencias personales">
+    <PreferenceCategory  android:id="@+id/settings" android:title="@string/preferencOverall">
 
         <EditTextPreference
-            android:key="edittext_preference"
-            android:title="Nombre"
-            android:summary="Cambia tu nombre en la app"
-            android:dialogTitle="Nuevo Nombre" />
+            android:id="@+id/settingsEditName"
+            android:dialogTitle="@string/prefNameDialog"
+            android:key="preference_name"
+            android:summary="@string/prefNameDesc"
+            android:title="@string/prefName"
+            android:dialogLayout="@layout/pref_dialog_edittext_fix" />
+
+
         <EditTextPreference
-            android:key="edittext_preference"
-            android:title="Descripción"
-            android:summary="Cambia tu descripción en la app"
-            android:dialogTitle="Nuevo Descripción" />
+            android:id="@+id/settingsEditDesc"
+            android:dialogTitle="@string/prefDescDialog"
+            android:key="preference_desc"
+            android:summary="@string/prefDescDesc"
+            android:title="@string/prefDesc"
+            android:dialogLayout="@layout/pref_dialog_edittext_fix" />
+
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="Sesión">
+    <PreferenceCategory android:title="@string/session">
 
+        <Preference
+            android:id="@+id/settingsCloseSession"
+            android:key="preference_close_session"
+            android:title="@string/endSession"></Preference>
 
     </PreferenceCategory>
-
 
 
 </PreferenceScreen>

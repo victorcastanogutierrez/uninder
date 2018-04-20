@@ -3,4 +3,19 @@
     <string name="account">Account</string>
     <string name="search">Search</string>
     <string name="matches">Matches</string>
+
+    <!-- preferences -->
+    <string name="preferencOverall">Personal Settings</string>
+    <string name="prefName">Name</string>
+    <string name="prefNameDesc">Change your name in Uninder</string>
+    <string name="prefNameDialog">New Name</string>
+
+    <string name="prefDesc">Description</string>
+    <string name="prefDescDesc">Change your description in Uninder</string>
+    <string name="prefDescDialog">New Description</string>
+    <string name="session">Session</string>
+    <string name="endSession">Close Session</string>
+
+
+
 </resources>

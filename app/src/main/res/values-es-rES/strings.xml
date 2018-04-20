@@ -4,4 +4,18 @@
     <string name="account">Cuenta</string>
     <string name="search">Buscar</string>
     <string name="matches">Matches</string>
+
+    <!-- preferences -->
+    <string name="preferencOverall">Ajustes personales</string>
+    <string name="prefName">Nombre</string>
+    <string name="prefNameDesc">Cambia tu nombre en Uninder</string>
+    <string name="prefNameDialog">Nuevo Nombre</string>
+
+    <string name="prefDesc">Descripción</string>
+    <string name="prefDescDesc">Cambia tú descripción en Uninder</string>
+    <string name="prefDescDialog">Nueva descripción</string>
+    <string name="session">Sesión</string>
+    <string name="endSession">Cerrar Sesión</string>
+
+
 </resources>
