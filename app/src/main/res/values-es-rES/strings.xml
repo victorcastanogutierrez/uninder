@@ -17,5 +17,7 @@
     <string name="session">Sesión</string>
     <string name="endSession">Cerrar Sesión</string>
 
+    <string name="prefPhoto">Cambiar fotografía</string>
+
 
 </resources>

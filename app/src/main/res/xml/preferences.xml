@@ -1,23 +1,30 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory  android:id="@+id/settings" android:title="@string/preferencOverall">
+    <PreferenceCategory
+        android:id="@+id/settings"
+        android:title="@string/preferencOverall">
 
         <EditTextPreference
             android:id="@+id/settingsEditName"
+            android:dialogLayout="@layout/pref_dialog_edittext_fix"
             android:dialogTitle="@string/prefNameDialog"
             android:key="preference_name"
             android:summary="@string/prefNameDesc"
-            android:title="@string/prefName"
-            android:dialogLayout="@layout/pref_dialog_edittext_fix" />
+            android:title="@string/prefName" />
 
 
         <EditTextPreference
             android:id="@+id/settingsEditDesc"
+            android:dialogLayout="@layout/pref_dialog_edittext_fix"
             android:dialogTitle="@string/prefDescDialog"
             android:key="preference_desc"
             android:summary="@string/prefDescDesc"
-            android:title="@string/prefDesc"
-            android:dialogLayout="@layout/pref_dialog_edittext_fix" />
+            android:title="@string/prefDesc" />
+
+        <Preference
+            android:id="@+id/settingPicture"
+            android:key="preference_change_photo"
+            android:title="@string/prefPhoto"></Preference>
 
 
     </PreferenceCategory>
