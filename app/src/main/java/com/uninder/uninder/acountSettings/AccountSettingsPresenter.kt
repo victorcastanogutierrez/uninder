@@ -1,5 +1,7 @@
 package com.uninder.uninder.acountSettings
 
+import android.net.Uri
+
 
 interface AccountSettingsPresenter {
 
@@ -9,6 +11,7 @@ interface AccountSettingsPresenter {
 
     fun changePicture()
 
+    fun savePicture(contentURI: Uri)
 
     fun closeSession()
 }

@@ -10,13 +10,16 @@ import com.uninder.uninder.R
 import kotlinx.android.synthetic.main.get_matches.*
 import android.content.Intent
 import android.net.Uri
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.card_person.*
 
 
 class MatchesFragment : Fragment(), GetMatchesView {
 
 
-    private var presenter : GetMatchesPresenter = GetMatchesPresenterImpl()
-
+    private var presenter: GetMatchesPresenter = GetMatchesPresenterImpl()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +37,15 @@ class MatchesFragment : Fragment(), GetMatchesView {
     private fun intialize() {
 
         matches_list.layoutManager = LinearLayoutManager(this.activity)
-        matches_list.adapter = MatchListAdapter(presenter.getMatches(), {email->sendMail(email) })
+        matches_list.adapter = MatchListAdapter(presenter.getMatches(), { email -> sendMail(email) },{
+            view,url -> putCircularImage(view,url)
+        })
 
+
+    }
+
+    override fun putCircularImage( view: ImageView,url: String) {
+        Glide.with(this.context!!).load(url).apply(RequestOptions.circleCropTransform()).into(view)
     }
 
     override fun sendMail(email: String) {

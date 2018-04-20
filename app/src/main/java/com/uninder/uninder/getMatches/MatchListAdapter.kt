@@ -5,15 +5,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.uninder.uninder.R
 import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_match.view.*
 
-
-class MatchListAdapter(private val personas: List<Person>, val sendMail: (String) -> Unit)
+class MatchListAdapter(private val personas: List<Person>, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
     : RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
 
-    class ViewHolder(val cardView: CardView, val sendMail: (String) -> Unit)
+    class ViewHolder(val cardView: CardView, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
         : RecyclerView.ViewHolder(cardView) {
 
         fun bindForecast(person: Person) {
@@ -21,7 +21,7 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail: (String
             with(person) {
 
                 itemView.matchTitle.text = name
-                itemView.matchEmail.text = email
+                putImage(itemView.matchImage, "https://www.infobae.com/new-resizer/4F6iYLIjE7hXne2slDNaA3hKEAU=/600x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2018/02/14180759/PSG-Real-Madrid-festejo-Cristiano-Ronaldo-1.jpg")
                 itemView.matchButton.setOnClickListener { sendMail(email) }
             }
         }
@@ -33,7 +33,7 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail: (String
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_match, parent, false) as CardView
 
-        return ViewHolder(view, sendMail)
+        return ViewHolder(view, sendMail, putImage)
     }
 
     override fun getItemCount() = personas.size
