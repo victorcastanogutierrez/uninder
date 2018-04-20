@@ -21,11 +21,10 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail: (String
             with(person) {
 
                 itemView.matchTitle.text = name
-                itemView.matchDescription.text = description
+                itemView.matchEmail.text = email
                 itemView.matchButton.setOnClickListener { sendMail(email) }
             }
         }
-
 
     }
 

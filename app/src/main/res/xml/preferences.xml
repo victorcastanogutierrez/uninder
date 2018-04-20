@@ -1,0 +1,28 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Preferencias personales">
+
+        <EditTextPreference
+            android:key="edittext_preference"
+            android:title="Nombre"
+            android:summary="Cambia tu nombre en la app"
+            android:dialogTitle="Nuevo Nombre" />
+        <EditTextPreference
+            android:key="edittext_preference"
+            android:title="Descripción"
+            android:summary="Cambia tu descripción en la app"
+            android:dialogTitle="Nuevo Descripción" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Sesión">
+
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

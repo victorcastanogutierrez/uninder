@@ -6,7 +6,7 @@
     android:layout_margin="8dp"
     card_view:cardBackgroundColor="@color/cardview_light_background"
     card_view:cardCornerRadius="8dp"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     card_view:cardElevation="4dp">
 
     <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +22,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textAppearance="@android:style/TextAppearance.Material.Title"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="84dp"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.4" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline7"
@@ -66,26 +66,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="20dp"
-            app:layout_constraintGuide_percent="0.7" />
-
-        <TextView
-            android:id="@+id/matchDescription"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Soy penaldo mejor jugador de futbol del planeta, soy increible, atletico e increible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline7"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/guideline6" />
+            app:layout_constraintGuide_percent="0.5" />
 
         <Button
             android:id="@+id/matchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -96,8 +82,10 @@
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toTopOf="@+id/guideline7" />
+            app:layout_constraintTop_toTopOf="@+id/guideline7"
+            app:layout_constraintVertical_bias="0.272" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline8"
@@ -105,8 +93,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="20dp"
-            app:layout_constraintGuide_percent="0.6" />"> '
+            app:layout_constraintGuide_percent="0.6" />
+
+        <TextView
+            android:id="@+id/matchEmail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/guideline7" /><![CDATA[
+
+
+
+        "> '
         app:layout_constraintBottom_toT />
+
+    ]]>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
