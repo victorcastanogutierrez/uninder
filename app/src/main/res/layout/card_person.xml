@@ -22,7 +22,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/personGuide2"
+            app:layout_constraintBottom_toTopOf="@+id/personGuide5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="20dp"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.70" />
 
         <android.support.constraint.Guideline
             android:id="@+id/personGuide3"
@@ -58,8 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85"
-            app:layout_constraintGuide_begin="20dp" />
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.85" />
 
         <ImageButton
             android:id="@+id/dislikeBtn"
@@ -71,6 +71,7 @@
             android:layout_marginTop="8dp"
             android:background="@color/cardview_shadow_end_color"
             android:backgroundTint="@color/cardview_shadow_end_color"
+            android:elevation="0dp"
             android:scaleX="2"
             android:scaleY="2"
             android:src="@drawable/ic_cancel_black_48dp"
@@ -98,5 +99,45 @@
             app:layout_constraintEnd_toStartOf="@+id/personGuide4"
             app:layout_constraintStart_toEndOf="@+id/dislikeBtn"
             app:layout_constraintTop_toTopOf="@+id/personGuide2" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/personGuide5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Soy un chico de Madeira  Portugal , guapo rico y que juega bien al futbol, hago chilenas en cuartos de final de shempions"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/personGuide2"
+            app:layout_constraintEnd_toStartOf="@+id/personGuide7"
+            app:layout_constraintStart_toStartOf="@+id/personGuide6"
+            app:layout_constraintTop_toTopOf="@+id/personGuide5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/personGuide6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/personGuide7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.95" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
