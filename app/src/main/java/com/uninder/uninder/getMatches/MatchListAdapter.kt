@@ -10,11 +10,10 @@ import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_match.view.*
 
 
-
-class MatchListAdapter(private val personas: List<Person>, val sendMail : (View, String) -> Unit)
+class MatchListAdapter(private val personas: List<Person>, val sendMail: (String) -> Unit)
     : RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
 
-    class ViewHolder(val cardView: CardView, val sendMail : (View, String) -> Unit)
+    class ViewHolder(val cardView: CardView, val sendMail: (String) -> Unit)
         : RecyclerView.ViewHolder(cardView) {
 
         fun bindForecast(person: Person) {
@@ -23,7 +22,7 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail : (View,
 
                 itemView.matchTitle.text = name
                 itemView.matchDescription.text = description
-                itemView.matchButton.setOnClickListener { sendMail(it,email) }
+                itemView.matchButton.setOnClickListener { sendMail(email) }
             }
         }
 
@@ -35,7 +34,7 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail : (View,
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_match, parent, false) as CardView
 
-        return ViewHolder(view,sendMail)
+        return ViewHolder(view, sendMail)
     }
 
     override fun getItemCount() = personas.size
