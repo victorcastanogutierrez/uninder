@@ -9,16 +9,27 @@ data class Person(val name: String?, val description: String, val email: String?
     constructor() : this("", "", "", null, null)
 
     companion object {
-        private val database:FirebaseDatabase? = FirebaseDatabase.getInstance()
+        private val database: FirebaseDatabase? = FirebaseDatabase.getInstance()
         private val currentUser = FirebaseAuth.getInstance().currentUser
 
-        fun savePersonSettings(description: String, gender:Int, searchGender:Int) {
+        fun savePersonSettings(description: String, gender: Int, searchGender: Int) {
             val ref = database!!.getReference("")
 
             ref.child("users").child(currentUser!!.email!!.replace('.', '_'))
                     .setValue(Person(currentUser!!.displayName, description, currentUser!!.email,
                             Gender.get(gender), Gender.get(searchGender)))
         }
+
+        fun update(propertyKey :String , newName: String) {
+
+            val ref = database!!.getReference("")
+
+            ref.child("users/${currentUser!!.email!!.replace('.', '_')}").child(propertyKey).setValue(
+                    newName
+            )
+
+        }
+
 
         fun findAll(onFinish: (List<Person>) -> Unit) {
             val personsListener = object : ValueEventListener {
