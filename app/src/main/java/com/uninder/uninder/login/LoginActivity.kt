@@ -44,8 +44,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
         presenterImpl = LoginPresenterImpl(this)
 
-       // login.setOnClickListener({ login() })
-        login.setOnClickListener({goToConfigUser(null)})
+        login.setOnClickListener({ login() })
 
         supportActionBar?.hide()
     }
@@ -82,8 +81,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         toast(R.string.logginError)
     }
 
-    override fun goToConfigUser(user: FirebaseUser?) {
-
+    override fun goToConfigUser(user: FirebaseUser) {
         startActivity<MainActivity>()
     }
 

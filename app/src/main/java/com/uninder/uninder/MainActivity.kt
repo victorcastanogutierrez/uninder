@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
 
     private fun onSelectedMenuBottom() {
 
-
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_matches -> changeFragment(MatchesFragment(), it)
@@ -117,9 +116,10 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         menuItem.isEnabled = true
         supportFragmentManager.beginTransaction().replace(mainContainer.id, fragment).commit()
         return true
-
     }
 
-
+    override fun showIndeterminateLoading() {
+        indeterminateProgressDialog(getString(R.string.savingConfiguration)).show()
+    }
 
 }

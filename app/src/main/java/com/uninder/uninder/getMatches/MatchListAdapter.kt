@@ -22,7 +22,11 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail: (String
 
                 itemView.matchTitle.text = name
                 putImage(itemView.matchImage, "https://www.infobae.com/new-resizer/4F6iYLIjE7hXne2slDNaA3hKEAU=/600x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2018/02/14180759/PSG-Real-Madrid-festejo-Cristiano-Ronaldo-1.jpg")
-                itemView.matchButton.setOnClickListener { sendMail(email) }
+                itemView.matchButton.setOnClickListener {
+                    if (email != null) {
+                        sendMail(email)
+                    }
+                }
             }
         }
 

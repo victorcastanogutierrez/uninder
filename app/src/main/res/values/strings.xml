@@ -10,6 +10,7 @@
         <item>Other</item>
     </string-array>
 
+    <string name="savingConfiguration">We are saving your configuration...</string>
     <string name="tellus">Tell us about yourself</string>
     <string name="initialConfig">Initial configuration</string>
     <string name="gender">Gender</string>

@@ -4,6 +4,11 @@ import com.uninder.uninder.userPreferences.UserPreferences
 import com.uninder.uninder.userPreferences.UserPreferencesSharedImpl
 import java.util.*
 import android.content.Context
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.uninder.uninder.model.Gender
+import com.uninder.uninder.model.Person
+
 
 class MainScreenPresenterImpl (private val view:MainScreenView, private val context:Context): MainScreenPresenter {
 
@@ -20,7 +25,8 @@ class MainScreenPresenterImpl (private val view:MainScreenView, private val cont
     }
 
     override fun saveConfig(gender: Int, searchGender: Int, description: String) {
-
+        view.showIndeterminateLoading()
+        Person.savePersonSettings(description, gender, searchGender)
     }
 
 }
