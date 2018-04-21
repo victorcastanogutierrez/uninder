@@ -12,15 +12,19 @@ import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.uninder.uninder.R
+import com.uninder.uninder.login.LoginPresenterImpl
+import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_person.*
 
 private const val FIND_PEOPLE_FRAGMENT = "FIND_PEOPLE_FRAGMENT"
 
-class FindPeopleFragment : Fragment() {
+class FindPeopleFragment : Fragment(), FindPeopleView {
 
+    lateinit var presenterImpl: FindPeoplePresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        presenterImpl = FindPeoplePresenterImpl(this.context, this)
         return inflater.inflate(R.layout.find_people, container, false)
     }
 
@@ -32,7 +36,8 @@ class FindPeopleFragment : Fragment() {
     private fun initialize() {
         likeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.like_button)) }
         dislikeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button)) }
-        addImage("https://firebasestorage.googleapis.com/v0/b/uninder-b943e.appspot.com/o/naferal14%40gmail.com%2FprofilePic?alt=media&token=5b54f2a9-eb14-40de-bfe2-78b81393bee6")
+        //addImage("https://firebasestorage.googleapis.com/v0/b/uninder-b943e.appspot.com/o/naferal14%40gmail.com%2FprofilePic?alt=media&token=5b54f2a9-eb14-40de-bfe2-78b81393bee6")
+        presenterImpl.loadData()
     }
 
 
