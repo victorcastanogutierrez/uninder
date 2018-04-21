@@ -13,6 +13,11 @@ interface MainScreenView {
     fun showIndeterminateLoading()
 
     /**
+     * Hides the indeterminate loading bar
+     */
+    fun hideIndeterminateLoading()
+
+    /**
      * Inits the main screen view
      */
     fun initialize()

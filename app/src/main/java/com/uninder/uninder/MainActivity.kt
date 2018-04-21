@@ -1,5 +1,7 @@
 package com.uninder.uninder
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -20,6 +22,8 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragment.OnCloseSessionListener {
 
     private lateinit var presenter: MainScreenPresenter
+
+    private lateinit var indeterminateDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +88,6 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
                 }
             }
         }.show()
-        initialize()
     }
 
     override fun initialize() {
@@ -119,7 +122,12 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
     }
 
     override fun showIndeterminateLoading() {
-        indeterminateProgressDialog(getString(R.string.savingConfiguration)).show()
+        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.savingConfiguration))
+        this.indeterminateDialog.show()
+    }
+
+    override fun hideIndeterminateLoading() {
+        indeterminateDialog.dismiss()
     }
 
 }
