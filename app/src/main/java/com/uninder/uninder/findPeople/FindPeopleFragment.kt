@@ -1,6 +1,7 @@
 package com.uninder.uninder.findPeople
 
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -12,15 +13,16 @@ import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.uninder.uninder.R
-import com.uninder.uninder.login.LoginPresenterImpl
-import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_person.*
+import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 
 private const val FIND_PEOPLE_FRAGMENT = "FIND_PEOPLE_FRAGMENT"
 
 class FindPeopleFragment : Fragment(), FindPeopleView {
 
     lateinit var presenterImpl: FindPeoplePresenter
+
+    private lateinit var indeterminateDialog: Dialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -46,11 +48,17 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     }
 
     private fun addAnimation(view: View, animation: Animation) {
-        Log.v(FIND_PEOPLE_FRAGMENT, " Estoy pasando por aqui")
         view.animation = animation
         view.startAnimation(animation)
-
     }
 
+    override fun showIndeterminateLoading() {
+        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.savingConfiguration))
+        this.indeterminateDialog.show()
+    }
+
+    override fun hideIndeterminateLoading() {
+        indeterminateDialog.dismiss()
+    }
 }
 

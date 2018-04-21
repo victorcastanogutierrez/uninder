@@ -36,5 +36,6 @@
     <string name="loggedIn">¡Sesión iniciada!</string>
     <string name="logginError">Error inciando sesión,pruebe de nuevo</string>
 
+    <string name="loadingContent">Cargando...</string>
 
 </resources>
