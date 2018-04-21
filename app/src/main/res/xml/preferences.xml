@@ -1,7 +1,7 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"   android:id="@+id/settings">
 
     <PreferenceCategory
-        android:id="@+id/settings"
+
         android:title="@string/preferencOverall">
 
         <EditTextPreference

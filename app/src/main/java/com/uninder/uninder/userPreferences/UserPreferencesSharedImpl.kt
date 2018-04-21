@@ -6,9 +6,12 @@ import android.content.SharedPreferences
 
 class UserPreferencesSharedImpl(private val context: Context) : UserPreferences {
 
+
     companion object {
         private const val PREFS_FILENAME = "com.uninder.userprefs"
         const val PREFS_ALREADY_SETUP = "setUp"
+        const val EDIT_NAME = "preference_name"
+        const val EDIT_DESC = "preference_desc"
     }
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
@@ -19,8 +22,12 @@ class UserPreferencesSharedImpl(private val context: Context) : UserPreferences 
         editor.commit()
     }
 
-    override fun retrieveBoolean(key: String):Boolean {
+    override fun retrieveBoolean(key: String): Boolean {
         return prefs.getBoolean(key, false)
+    }
+
+    override fun retrieveString(key: String): String {
+        return prefs.getString(key, "")
     }
 
 }

@@ -5,9 +5,9 @@ import android.net.Uri
 
 interface AccountSettingsPresenter {
 
-    fun editNameDialog()
+    fun editNameDialog(newValue: Any?)
 
-    fun editDescDialog()
+    fun editDescDialog(newValue: Any?)
 
     fun changePicture()
 
