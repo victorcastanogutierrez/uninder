@@ -19,4 +19,9 @@ interface FindPeoplePresenter {
      * Loads the proffile picture of a Person
      */
     fun loadNextPersonImage(person:Person?, onFinish: (uri: Uri) -> Unit)
+
+    /**
+     * Handles like to a Person
+     */
+    fun like(person: Person?)
 }

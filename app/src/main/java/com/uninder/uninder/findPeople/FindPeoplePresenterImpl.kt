@@ -2,6 +2,7 @@ package com.uninder.uninder.findPeople
 
 import android.content.Context
 import android.net.Uri
+import com.google.firebase.auth.FirebaseAuth
 import com.uninder.uninder.handler.PersonsManager
 import com.uninder.uninder.model.Person
 
@@ -9,10 +10,15 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
 
     override fun loadData(onFinish: () -> Unit) {
         view.showIndeterminateLoading()
-        Person.findAll({ persons ->
-            PersonsManager.persons = persons
+        if (PersonsManager.loaded) {
             onFinish()
-        })
+        } else {
+            Person.findAll({ persons ->
+                PersonsManager.loaded = true
+                PersonsManager.persons = persons
+                onFinish()
+            })
+        }
     }
 
     override fun getNextPerson(): Person? {
@@ -26,4 +32,7 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
         })
     }
 
+    override fun like(person: Person?) {
+        Person.doLike(person, FirebaseAuth.getInstance().currentUser!!.email)
+    }
 }

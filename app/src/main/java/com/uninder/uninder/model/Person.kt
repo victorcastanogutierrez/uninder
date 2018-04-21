@@ -18,7 +18,7 @@ data class Person(val name: String?, val description: String, val email: String?
             val ref = database!!.getReference("")
 
             ref.child("users").child(currentUser!!.email!!.replace('.', '_'))
-                    .setValue(Person(currentUser!!.displayName, description, currentUser!!.email,
+                    .setValue(Person(currentUser.displayName, description, currentUser.email,
                             Gender.get(gender), Gender.get(searchGender)))
         }
 
@@ -58,6 +58,12 @@ data class Person(val name: String?, val description: String, val email: String?
             storage.child("${person?.email}/profilePic").downloadUrl.addOnSuccessListener({
                 onFinish(it)
             })
+        }
+
+        fun doLike(personLiked:Person?, email:String?) {
+            val ref = database!!.getReference("")
+            ref.child("likes").child(email!!.replace('.', '_'))
+                    .updateChildren(mutableMapOf())
         }
     }
 }
