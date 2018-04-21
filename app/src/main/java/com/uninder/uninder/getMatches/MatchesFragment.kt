@@ -13,7 +13,6 @@ import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.card_person.*
 
 
 class MatchesFragment : Fragment(), GetMatchesView {
@@ -30,11 +29,11 @@ class MatchesFragment : Fragment(), GetMatchesView {
 
     override fun onStart() {
         super.onStart()
-        intialize()
+        initialise()
     }
 
 
-    private fun intialize() {
+    private fun initialise() {
 
         matches_list.layoutManager = LinearLayoutManager(this.activity)
         matches_list.adapter = MatchListAdapter(presenter.getMatches(), { email -> sendMail(email) },{

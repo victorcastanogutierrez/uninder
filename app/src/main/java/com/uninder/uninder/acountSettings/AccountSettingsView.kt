@@ -4,4 +4,10 @@ interface AccountSettingsView {
 
 
     fun startPictureIntent()
+
+    fun showSuccessOnUploadPic()
+
+    fun showErrorOnUploadPic()
+
+    fun showClosedSessionToast()
 }

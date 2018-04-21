@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import com.uninder.uninder.R
-import android.provider.MediaStore
+import org.jetbrains.anko.toast
 
 
 private const val EDIT_NAME = "preference_name"
@@ -17,7 +17,6 @@ private const val CHANGE_PHOTO = "preference_change_photo"
 private const val REQUEST_IMAGE_GET = 1
 
 class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView {
-
 
     private val presenter = AccountSettingsPresenterImpl(this)
 
@@ -46,14 +45,31 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
         startActivityForResult(galleryIntent, REQUEST_IMAGE_GET)
+
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
         if (requestCode == REQUEST_IMAGE_GET && resultCode == RESULT_OK) {
 
-            val contentURI = data.data
-            this.presenter.savePicture(contentURI)
+            val contentURI = data?.data
+            if (contentURI != null) {
+                this.presenter.savePicture(contentURI)
+            }
         }
+
+    }
+
+    override fun showSuccessOnUploadPic() {
+        context!!.toast(R.string.photUploadSuccess)
+    }
+
+    override fun showErrorOnUploadPic() {
+        context!!.toast(R.string.photUploadError)
+    }
+
+    override fun showClosedSessionToast() {
+        context!!.toast(R.string.loggedOut)
     }
 
 

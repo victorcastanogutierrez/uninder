@@ -16,8 +16,11 @@
     <string name="session">Session</string>
     <string name="endSession">Close Session</string>
     <string name="prefPhoto">Change Photo</string>
+    <string name="photUploadSuccess">Photo upload!</string>
+    <string name="photUploadError">Error while uploading, please try again!</string>
+    <string name="loggedOut">Logged out!</string>
 
-
-
+    <string name="loggedIn">¡Logged in!</string>
+    <string name="logginError">Error logging in, please try again!</string>
 
 </resources>

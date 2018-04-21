@@ -34,7 +34,11 @@ class AccountSettingsPresenterImpl(private val view: AccountSettingsView) : Acco
 
     override fun savePicture(contentURI: Uri) {
 
-        this.imageFirestoreHandler.uploadFile(contentURI,"naferal14@gmail.com")
+        this.imageFirestoreHandler.uploadFile(contentURI, {
+            this.view.showSuccessOnUploadPic()
+        }, {
+            this.view.showErrorOnUploadPic()
+        })
 
     }
 
