@@ -6,7 +6,7 @@ interface LoginView {
 
     fun showError()
 
-    fun goToConfigUser(user: FirebaseUser)
+    fun goToConfigUser(user: FirebaseUser?)
 
     fun login()
 }

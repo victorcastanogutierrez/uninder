@@ -32,12 +32,13 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
     override fun askForPreferences() {
         var genders = resources.getStringArray(R.array.gender)
         alert {
-            title = "Configuración"
+            title = getString(R.string.initialConfig)
             var selectedGender = 1
             var searchGender = 2
+            isCancelable = false
             customView {
                 verticalLayout {
-                    textView("Género")
+                    textView(getString(R.string.gender))
                     radioGroup {
                         orientation= LinearLayout.HORIZONTAL
                         var n=1
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
                             n++
                         }
                     }
-                    textView("Género buscado")
+                    textView(getString(R.string.genderLooked))
                     radioGroup {
                         orientation= LinearLayout.HORIZONTAL
                         var n=1
@@ -73,7 +74,9 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
                             n++
                         }
                     }
-                    var description = editText(getString(R.string.tellus))
+                    var description = editText{
+                        hint = getString(R.string.tellus)
+                    }
                     padding = dip(16)
                     positiveButton("Aceptar") {
                         presenter.saveConfig(selectedGender, searchGender, description.text.toString())
