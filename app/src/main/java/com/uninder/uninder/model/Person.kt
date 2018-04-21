@@ -1,8 +1,10 @@
 package com.uninder.uninder.model
 
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 
 data class Person(val name: String?, val description: String, val email: String?, val gender: Gender?, val genderLooked: Gender?) {
 
@@ -20,7 +22,7 @@ data class Person(val name: String?, val description: String, val email: String?
                             Gender.get(gender), Gender.get(searchGender)))
         }
 
-        fun findAll(onFinish: (List<Person>) -> Unit) {
+        fun findAll(onFinish: (MutableList<Person>) -> Unit) {
             val personsListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val persons = mutableListOf<Person>()
@@ -40,6 +42,13 @@ data class Person(val name: String?, val description: String, val email: String?
 
             val ref = database!!.getReference("")
             ref.child("users").addListenerForSingleValueEvent(personsListener)
+        }
+
+        fun findPersonImage(person:Person?, onFinish: (Uri) -> Unit) {
+            val storage = FirebaseStorage.getInstance().reference
+            storage.child("naferal14@gmail.com/profilePic").downloadUrl.addOnSuccessListener({
+                onFinish(it)
+            })
         }
     }
 }

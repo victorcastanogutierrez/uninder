@@ -11,4 +11,9 @@ interface FindPeopleView {
      * Hides the indeterminate loading bar
      */
     fun hideIndeterminateLoading()
+
+    /**
+     * Callback called when data is loaded
+     */
+    fun onDataLoaded()
 }

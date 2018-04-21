@@ -2,6 +2,9 @@ package com.uninder.uninder.findPeople
 
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -13,6 +16,7 @@ import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.uninder.uninder.R
+import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_person.*
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 
@@ -32,19 +36,26 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun onStart() {
         super.onStart()
-        initialize()
+        presenterImpl.loadData({ onDataLoaded() })
     }
 
-    private fun initialize() {
+    private fun initialize(uri: Uri) {
+        addImage(uri.toString())
+    }
+
+    override fun onDataLoaded() {
         likeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.like_button)) }
         dislikeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button)) }
-        //addImage("https://firebasestorage.googleapis.com/v0/b/uninder-b943e.appspot.com/o/naferal14%40gmail.com%2FprofilePic?alt=media&token=5b54f2a9-eb14-40de-bfe2-78b81393bee6")
-        presenterImpl.loadData()
+
+        val person: Person? = presenterImpl.getNextPerson()
+        presenterImpl.loadNextPersonImage(person, { uri:Uri -> initialize(uri) })
     }
 
-
     private fun addImage(imageUrl: String) {
-        Glide.with(this.context!!).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(personImage)
+        Glide.with(this.context!!)
+            .load(imageUrl)
+            .apply(RequestOptions.circleCropTransform())
+            .into(personImage)
     }
 
     private fun addAnimation(view: View, animation: Animation) {
@@ -53,7 +64,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     }
 
     override fun showIndeterminateLoading() {
-        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.savingConfiguration))
+        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.loadingContent))
         this.indeterminateDialog.show()
     }
 

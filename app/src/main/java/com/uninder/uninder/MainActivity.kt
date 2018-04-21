@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
     }
 
     override fun showIndeterminateLoading() {
-        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.loadingContent))
+        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.savingConfiguration))
         this.indeterminateDialog.show()
     }
 
