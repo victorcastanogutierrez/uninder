@@ -55,7 +55,7 @@ data class Person(val name: String?, val description: String, val email: String?
 
         fun findPersonImage(person:Person?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
-            storage.child("naferal14@gmail.com/profilePic").downloadUrl.addOnSuccessListener({
+            storage.child("${person?.email}/profilePic").downloadUrl.addOnSuccessListener({
                 onFinish(it)
             })
         }

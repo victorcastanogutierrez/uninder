@@ -63,6 +63,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
             .apply(RequestOptions.circleCropTransform())
             .into(personImage)
     }
+    
 
     private fun addAnimation(view: View, animation: Animation) {
         view.animation = animation
