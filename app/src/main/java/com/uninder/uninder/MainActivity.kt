@@ -1,5 +1,7 @@
 package com.uninder.uninder
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
 
     private lateinit var presenter: MainScreenPresenter
 
+    private lateinit var indeterminateDialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,12 +36,13 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
     override fun askForPreferences() {
         var genders = resources.getStringArray(R.array.gender)
         alert {
-            title = "Configuración"
+            title = getString(R.string.initialConfig)
             var selectedGender = 1
             var searchGender = 2
+            isCancelable = false
             customView {
                 verticalLayout {
-                    textView("Género")
+                    textView(getString(R.string.gender))
                     radioGroup {
                         orientation= LinearLayout.HORIZONTAL
                         var n=1
@@ -55,7 +60,7 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
                             n++
                         }
                     }
-                    textView("Género buscado")
+                    textView(getString(R.string.genderLooked))
                     radioGroup {
                         orientation= LinearLayout.HORIZONTAL
                         var n=1
@@ -73,7 +78,9 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
                             n++
                         }
                     }
-                    var description = editText(getString(R.string.tellus))
+                    var description = editText{
+                        hint = getString(R.string.tellus)
+                    }
                     padding = dip(16)
                     positiveButton("Aceptar") {
                         presenter.saveConfig(selectedGender, searchGender, description.text.toString())
@@ -81,10 +88,9 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
                 }
             }
         }.show()
-        initialize()
     }
 
-    private fun initialize() {
+    override fun initialize() {
         navigation.selectedItemId = R.id.menu_search
         onSelectedMenuBottom()
         supportFragmentManager.beginTransaction().add(mainContainer.id, FindPeopleFragment()).commit()
@@ -92,7 +98,6 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
     }
 
     private fun onSelectedMenuBottom() {
-
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -114,9 +119,15 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         menuItem.isEnabled = true
         supportFragmentManager.beginTransaction().replace(mainContainer.id, fragment).commit()
         return true
-
     }
 
+    override fun showIndeterminateLoading() {
+        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.savingConfiguration))
+        this.indeterminateDialog.show()
+    }
 
+    override fun hideIndeterminateLoading() {
+        indeterminateDialog.dismiss()
+    }
 
 }

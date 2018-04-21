@@ -11,7 +11,11 @@
         <item>Otros</item>
     </string-array>
 
+    <string name="savingConfiguration">Estamos guardando la configuración...</string>
     <string name="tellus">Cuéntanos algo sobre tí</string>
+    <string name="initialConfig">Configuración inicial</string>
+    <string name="gender">Género</string>
+    <string name="genderLooked">Género buscado</string>
     <!-- preferences -->
     <string name="preferencOverall">Ajustes personales</string>
     <string name="prefName">Nombre</string>

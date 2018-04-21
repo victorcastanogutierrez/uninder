@@ -82,7 +82,6 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     }
 
     override fun goToConfigUser(user: FirebaseUser) {
-
         startActivity<MainActivity>()
     }
 
