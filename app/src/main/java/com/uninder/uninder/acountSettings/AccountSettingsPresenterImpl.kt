@@ -22,11 +22,11 @@ class AccountSettingsPresenterImpl(private val view: AccountSettingsView, contex
 
 
     override fun editNameDialog(newValue: Any?) {
-        Log.v("PREFERENCES",newValue.toString())
+        Log.v("PREFERENCES_NAME", newValue.toString())
     }
 
     override fun editDescDialog(newValue: Any?) {
-
+        Log.v("PREFERENCES_DESCRIPTION", newValue.toString())
     }
 
     override fun changePicture() {

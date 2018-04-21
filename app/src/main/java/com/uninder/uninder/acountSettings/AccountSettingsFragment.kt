@@ -3,11 +3,11 @@ package com.uninder.uninder.acountSettings
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.support.v7.preference.PreferenceScreen
-import android.support.v7.widget.RecyclerView
 import com.uninder.uninder.R
 import org.jetbrains.anko.toast
 
@@ -20,6 +20,7 @@ private const val CHANGE_PHOTO = "preference_change_photo"
 private const val REQUEST_IMAGE_GET = 1
 
 class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView {
+
 
     private lateinit var presenter: AccountSettingsPresenter
 
@@ -38,18 +39,19 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
+        addChangeEventListener(EDIT_DESC)
+        addChangeEventListener(EDIT_NAME)
 
     }
 
-    override fun setPreferenceScreen(preferenceScreen: PreferenceScreen?) {
 
-        super.setPreferenceScreen(preferenceScreen)
-        preferenceScreen?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
-
-            onPreferenceChanged(preference, newValue)
-        }
+    private fun addChangeEventListener(key: String) {
+        findPreference(key).onPreferenceChangeListener = Preference.OnPreferenceChangeListener(
+                { preference, newValue ->
+                    onPreferenceChanged(preference, newValue)
+                }
+        )
     }
-
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
 
