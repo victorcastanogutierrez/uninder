@@ -26,6 +26,8 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     lateinit var presenterImpl: FindPeoplePresenter
 
+    private var currentPerson: Person? = null
+
     private lateinit var indeterminateDialog: Dialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +44,27 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     private fun initialize(uri: Uri, person:Person?) {
         addImage(uri.toString())
         addData(person)
+        currentPerson = person
     }
 
     override fun onDataLoaded() {
-        likeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.like_button)) }
-        dislikeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button)) }
+        setUpButtons()
 
         val person: Person? = presenterImpl.getNextPerson()
+        Log.d("Busca", "Busca el siguiente $person")
         presenterImpl.loadNextPersonImage(person, { uri:Uri ->
             initialize(uri, person)
         })
+    }
+
+    private fun setUpButtons() {
+        likeBtn.setOnClickListener {
+            addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
+            presenterImpl.like(currentPerson)
+        }
+        dislikeBtn.setOnClickListener {
+            addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
+        }
     }
 
     private fun addData(person:Person?){
