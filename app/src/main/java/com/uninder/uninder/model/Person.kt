@@ -2,7 +2,6 @@ package com.uninder.uninder.model
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 
 data class Person(val name: String?, val description: String, val email: String?, val gender: Gender?, val genderLooked: Gender?) {
 

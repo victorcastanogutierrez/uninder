@@ -7,7 +7,7 @@ import android.content.SharedPreferences
 class UserPreferencesSharedImpl(private val context: Context) : UserPreferences {
 
     companion object {
-        const val PREFS_FILENAME = "com.uninder.userprefs"
+        private const val PREFS_FILENAME = "com.uninder.userprefs"
         const val PREFS_ALREADY_SETUP = "setUp"
     }
 
@@ -16,6 +16,7 @@ class UserPreferencesSharedImpl(private val context: Context) : UserPreferences 
     override fun saveBooleanValue(key: String, value: Boolean) {
         val editor = prefs.edit()
         editor.putBoolean(key, value)
+        editor.commit()
     }
 
     override fun retrieveBoolean(key: String):Boolean {

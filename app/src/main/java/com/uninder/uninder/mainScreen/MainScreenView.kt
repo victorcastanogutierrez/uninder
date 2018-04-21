@@ -11,4 +11,9 @@ interface MainScreenView {
      * Shows an inderterminate loading bar
      */
     fun showIndeterminateLoading()
+
+    /**
+     * Inits the main screen view
+     */
+    fun initialize()
 }
