@@ -37,7 +37,7 @@ data class Person(val name: String?, val description: String, val email: String?
                     val persons = mutableListOf<Person>()
                     dataSnapshot.children.forEach({
                         val person = it.getValue<Person>(Person::class.java)
-                        if (person!!.email.equals(currentUser!!.email)) {
+                        if (!person!!.email.equals(currentUser!!.email)) {
                             persons.add(person)
                         }
                     })

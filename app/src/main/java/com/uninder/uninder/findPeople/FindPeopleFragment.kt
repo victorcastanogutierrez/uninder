@@ -49,6 +49,12 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
         val person: Person? = presenterImpl.getNextPerson()
         presenterImpl.loadNextPersonImage(person, { uri:Uri -> initialize(uri) })
+        addData(person)
+    }
+
+    private fun addData(person:Person?){
+        personName.text = person?.name
+        personDescription.text = person?.description
     }
 
     private fun addImage(imageUrl: String) {
