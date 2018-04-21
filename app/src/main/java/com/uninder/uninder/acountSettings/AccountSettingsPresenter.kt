@@ -13,5 +13,5 @@ interface AccountSettingsPresenter {
 
     fun savePicture(contentURI: Uri)
 
-    fun closeSession()
+    fun closeSession(listener: AccountSettingsFragment.OnCloseSessionListener?)
 }

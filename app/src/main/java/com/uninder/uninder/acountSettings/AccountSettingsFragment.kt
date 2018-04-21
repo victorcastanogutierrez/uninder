@@ -1,6 +1,7 @@
 package com.uninder.uninder.acountSettings
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.preference.Preference
@@ -20,6 +21,18 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
 
     private val presenter = AccountSettingsPresenterImpl(this)
 
+    private var listener: OnCloseSessionListener? = null
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnCloseSessionListener)
+            listener = context
+        else
+            throw RuntimeException("${context.toString()} debe implementar OnCloseSessionListener")
+    }
+
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
     }
@@ -31,7 +44,7 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
 
             EDIT_NAME -> this.presenter.editNameDialog()
             EDIT_DESC -> this.presenter.editDescDialog()
-            CLOSE_SESSION -> this.presenter.closeSession()
+            CLOSE_SESSION -> this.presenter.closeSession(listener)
             CHANGE_PHOTO -> this.presenter.changePicture()
             else -> {
             }
@@ -70,6 +83,10 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
 
     override fun showClosedSessionToast() {
         context!!.toast(R.string.loggedOut)
+    }
+
+    interface OnCloseSessionListener {
+        fun closeSession()
     }
 
 

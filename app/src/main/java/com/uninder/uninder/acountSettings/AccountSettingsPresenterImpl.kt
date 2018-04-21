@@ -26,9 +26,9 @@ class AccountSettingsPresenterImpl(private val view: AccountSettingsView) : Acco
 
     }
 
-    override fun closeSession() {
+    override fun closeSession(listener: AccountSettingsFragment.OnCloseSessionListener?) {
 
-        FirebaseAuth.getInstance().signOut()
+        listener?.closeSession()
 
     }
 

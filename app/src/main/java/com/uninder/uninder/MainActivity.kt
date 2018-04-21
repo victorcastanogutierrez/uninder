@@ -5,12 +5,14 @@ import android.preference.PreferenceFragment
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import com.uninder.uninder.acountSettings.AccountSettingsFragment
 import com.uninder.uninder.findPeople.FindPeopleFragment
 import com.uninder.uninder.getMatches.MatchesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AccountSettingsFragment.OnCloseSessionListener {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +40,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
+    
+    override fun closeSession() {
+        FirebaseAuth.getInstance().signOut()
+        supportFragmentManager.popBackStack()
+        finish()
+    }
 
     private fun changeFragment(fragment: Fragment, menuItem: MenuItem): Boolean {
         menuItem.isEnabled = true
