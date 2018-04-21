@@ -4,4 +4,12 @@
     <string name="account">Cuenta</string>
     <string name="search">Buscar</string>
     <string name="matches">Matches</string>
+
+    <string-array name="gender">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string name="tellus">Cuéntanos algo sobre tí</string>
 </resources>

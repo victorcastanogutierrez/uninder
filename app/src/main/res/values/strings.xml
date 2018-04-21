@@ -3,4 +3,12 @@
     <string name="account">Account</string>
     <string name="search">Search</string>
     <string name="matches">Matches</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="tellus">Tell us about yourself</string>
 </resources>
