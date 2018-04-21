@@ -39,8 +39,9 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         presenterImpl.loadData({ onDataLoaded() })
     }
 
-    private fun initialize(uri: Uri) {
+    private fun initialize(uri: Uri, person:Person?) {
         addImage(uri.toString())
+        addData(person)
     }
 
     override fun onDataLoaded() {
@@ -48,8 +49,9 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         dislikeBtn.setOnClickListener { addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button)) }
 
         val person: Person? = presenterImpl.getNextPerson()
-        presenterImpl.loadNextPersonImage(person, { uri:Uri -> initialize(uri) })
-        addData(person)
+        presenterImpl.loadNextPersonImage(person, { uri:Uri ->
+            initialize(uri, person)
+        })
     }
 
     private fun addData(person:Person?){

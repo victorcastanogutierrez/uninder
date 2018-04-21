@@ -9,10 +9,15 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
 
     override fun loadData(onFinish: () -> Unit) {
         view.showIndeterminateLoading()
-        Person.findAll({ persons ->
-            PersonsManager.persons = persons
+        if (PersonsManager.loaded) {
             onFinish()
-        })
+        } else {
+            Person.findAll({ persons ->
+                PersonsManager.loaded = true
+                PersonsManager.persons = persons
+                onFinish()
+            })
+        }
     }
 
     override fun getNextPerson(): Person? {
