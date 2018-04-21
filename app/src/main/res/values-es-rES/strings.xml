@@ -12,4 +12,25 @@
     </string-array>
 
     <string name="tellus">Cuéntanos algo sobre tí</string>
+    <!-- preferences -->
+    <string name="preferencOverall">Ajustes personales</string>
+    <string name="prefName">Nombre</string>
+    <string name="prefNameDesc">Cambia tu nombre en Uninder</string>
+    <string name="prefNameDialog">Nuevo Nombre</string>
+
+    <string name="prefDesc">Descripción</string>
+    <string name="prefDescDesc">Cambia tú descripción en Uninder</string>
+    <string name="prefDescDialog">Nueva descripción</string>
+    <string name="session">Sesión</string>
+    <string name="endSession">Cerrar Sesión</string>
+
+    <string name="prefPhoto">Cambiar fotografía</string>
+    <string name="photUploadSuccess">¡Fotografía subida!</string>
+    <string name="photUploadError">Error subiendo la fotografía,pruebe de nuevo</string>
+    <string name="loggedOut">Sesión cerrada</string>
+
+    <string name="loggedIn">¡Sesión iniciada!</string>
+    <string name="logginError">Error inciando sesión,pruebe de nuevo</string>
+
+
 </resources>

@@ -11,4 +11,23 @@
     </string-array>
 
     <string name="tellus">Tell us about yourself</string>
+    <!-- preferences -->
+    <string name="preferencOverall">Personal Settings</string>
+    <string name="prefName">Name</string>
+    <string name="prefNameDesc">Change your name in Uninder</string>
+    <string name="prefNameDialog">New Name</string>
+
+    <string name="prefDesc">Description</string>
+    <string name="prefDescDesc">Change your description in Uninder</string>
+    <string name="prefDescDialog">New Description</string>
+    <string name="session">Session</string>
+    <string name="endSession">Close Session</string>
+    <string name="prefPhoto">Change Photo</string>
+    <string name="photUploadSuccess">Photo upload!</string>
+    <string name="photUploadError">Error while uploading, please try again!</string>
+    <string name="loggedOut">Logged out!</string>
+
+    <string name="loggedIn">¡Logged in!</string>
+    <string name="logginError">Error logging in, please try again!</string>
+
 </resources>
