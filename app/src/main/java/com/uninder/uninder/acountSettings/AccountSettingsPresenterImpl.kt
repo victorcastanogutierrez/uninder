@@ -1,23 +1,32 @@
 package com.uninder.uninder.acountSettings
 
+import android.content.Context
 import android.net.Uri
-import com.google.firebase.auth.FirebaseAuth
+import android.util.Log
 import com.uninder.uninder.handler.ImageFirestoreHandler
+import com.uninder.uninder.userPreferences.UserPreferences
+import com.uninder.uninder.userPreferences.UserPreferencesSharedImpl
 
 
-class AccountSettingsPresenterImpl(private val view: AccountSettingsView) : AccountSettingsPresenter {
+class AccountSettingsPresenterImpl(private val view: AccountSettingsView, context: Context) : AccountSettingsPresenter {
 
-    private lateinit var imageFirestoreHandler: ImageFirestoreHandler
+    private val imageFirestoreHandler: ImageFirestoreHandler
+
+    private val sharedHelper: UserPreferences
 
     init {
+        this.sharedHelper = UserPreferencesSharedImpl(context)
+
         imageFirestoreHandler = ImageFirestoreHandler()
     }
 
 
-    override fun editNameDialog() {
+    override fun editNameDialog(newValue: Any?) {
+        Log.v("PREFERENCES",newValue.toString())
     }
 
-    override fun editDescDialog() {
+    override fun editDescDialog(newValue: Any?) {
+
     }
 
     override fun changePicture() {
