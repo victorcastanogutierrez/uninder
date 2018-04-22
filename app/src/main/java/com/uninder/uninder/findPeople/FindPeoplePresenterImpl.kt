@@ -10,8 +10,6 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
 
 
     override fun loadData(onFinish: () -> Unit) {
-
-
         view.showIndeterminateLoading()
         if (PersonsManager.loaded) {
             onFinish()
@@ -26,7 +24,6 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
     }
 
     override fun getNextPerson(): Person? {
-
         return if (PersonsManager.persons.isEmpty()) null else PersonsManager.persons.elementAt(0)
     }
 
