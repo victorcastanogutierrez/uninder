@@ -50,13 +50,10 @@ class MatchesFragment : Fragment(), GetMatchesView {
         val matchesCount = data.count()
 
         data.forEach({
-            Log.d("Busca", "busca iumagen para $it")
             Person.findPersonImage(it, { uri:Uri ->
-                Log.d("Encuentra", "Encuentra iumagen para $it")
                 output[it] = uri.toString()
                 if (output.count() == matchesCount) {
                     setUpAdapter(output)
-                    Log.d("Acaba", "acaba")
                 }
             })
         })

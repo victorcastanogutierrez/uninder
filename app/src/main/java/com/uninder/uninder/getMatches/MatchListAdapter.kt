@@ -8,15 +8,15 @@ import android.widget.ImageView
 import com.uninder.uninder.R
 import kotlinx.android.synthetic.main.card_match.view.*
 
-class MatchListAdapter(private val persons: Map<String, String>, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
+class MatchListAdapter(private val persons: Map<String, String>, private val sendMail: (String) -> Unit,
+                       private val putImage: (ImageView, String) -> Unit)
     : RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
 
-    class ViewHolder(val cardView: CardView, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
+    class ViewHolder(private val cardView: CardView, private val sendMail: (String) -> Unit,
+                     private val putImage: (ImageView, String) -> Unit)
         : RecyclerView.ViewHolder(cardView) {
 
         fun bindMatch(entry: Pair<String, String>) {
-
-
             itemView.matchTitle.text = entry.first
             putImage(itemView.matchImage, entry.second)
             itemView.matchButton.setOnClickListener {
