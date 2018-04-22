@@ -10,8 +10,6 @@ class UserPreferencesSharedImpl(private val context: Context) : UserPreferences 
     companion object {
         private const val PREFS_FILENAME = "com.uninder.userprefs"
         const val PREFS_ALREADY_SETUP = "setUp"
-        const val EDIT_NAME = "preference_name"
-        const val EDIT_DESC = "preference_desc"
     }
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
