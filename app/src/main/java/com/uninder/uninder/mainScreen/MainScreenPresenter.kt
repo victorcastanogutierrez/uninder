@@ -12,4 +12,9 @@ interface MainScreenPresenter {
      * Saves the user account's settings
      */
     fun saveConfig(gender:Int, searchGender:Int, description:String)
+
+    /**
+     * Registers an event which is fired when a match is inserted in the database
+     */
+    fun registerMatchesEvent()
 }
