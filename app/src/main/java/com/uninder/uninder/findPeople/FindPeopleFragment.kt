@@ -18,7 +18,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.uninder.uninder.R
 import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_person.*
+import kotlinx.android.synthetic.main.find_people.*
+import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
+import org.jetbrains.anko.yesButton
 
 private const val FIND_PEOPLE_FRAGMENT = "FIND_PEOPLE_FRAGMENT"
 
@@ -46,22 +49,28 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         addData(person)
         currentPerson = person
         setUpButtons()
-
     }
 
     override fun onDataLoaded() {
-
         val person: Person? = presenterImpl.getNextPerson()
-        Log.d("Busca", "Busca el siguiente $person")
-        presenterImpl.loadNextPersonImage(person, { uri:Uri ->
-            initialize(uri, person)
-        })
+        if (null == person) {
+            cardInfoPerson.visibility = View.INVISIBLE
+            alert(getString(R.string.noMorePeople)) {
+                title = getString(R.string.noMorePeopleTitle)
+                yesButton {  }
+            }.show()
+        } else {
+            presenterImpl.loadNextPersonImage(person, { uri:Uri ->
+                initialize(uri, person)
+            })
+        }
     }
 
     private fun setUpButtons() {
         likeBtn.setOnClickListener {
             addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
             presenterImpl.like(currentPerson)
+            this.onDataLoaded()
         }
         dislikeBtn.setOnClickListener {
             addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
@@ -81,7 +90,6 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
             .apply(RequestOptions.circleCropTransform())
             .into(personImage)
     }
-    
 
     private fun addAnimation(view: View, animation: Animation) {
         view.animation = animation

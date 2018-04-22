@@ -13,6 +13,7 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
         view.showIndeterminateLoading()
         if (PersonsManager.loaded) {
             onFinish()
+            view.hideIndeterminateLoading()
         } else {
             Person.findAll({ persons ->
                 PersonsManager.loaded = true

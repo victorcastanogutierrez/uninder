@@ -37,5 +37,7 @@
     <string name="logginError">Error inciando sesión,pruebe de nuevo</string>
 
     <string name="loadingContent">Cargando...</string>
+    <string name="noMorePeopleTitle">¡Has acabado!</string>
+    <string name="noMorePeople">Ya no hay más gente, tendrás que esperar :(</string>
 
 </resources>

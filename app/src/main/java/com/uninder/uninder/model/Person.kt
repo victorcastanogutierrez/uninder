@@ -62,17 +62,15 @@ data class Person(val name: String?, val description: String, val email: String?
         }
 
         fun doLike(personLiked: Person?, email: String?) {
-            val ref = database!!.getReference("")
-            ref.child("likes").child(email!!.replace('.', '_'))
-                    .updateChildren(mutableMapOf())
+            val ref = database!!.getReference("likes")
+            ref.child("${email!!.replace('.', '_')}").child("${personLiked?.email?.replace('.', '_')}").setValue(true
+            )
         }
 
         fun doDislike(personDisLiked: Person?, email: String?) {
             val ref = database!!.getReference("dislikes")
             ref.child("${email!!.replace('.', '_')}").child("${personDisLiked?.email?.replace('.', '_')}").setValue(true
             )
-
-
         }
     }
 }
