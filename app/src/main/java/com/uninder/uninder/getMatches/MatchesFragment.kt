@@ -46,23 +46,23 @@ class MatchesFragment : Fragment(), GetMatchesView {
 
     override fun onMatchesDataLoaded(data:MutableList<String>) {
         val output = mutableMapOf<String, String>()
+        val matchesCount = data.count()
 
         data.forEach({
-            Log.d("Busca", "busca iumagen para $it")
             Person.findPersonImage(it, { uri:Uri ->
-                Log.d("Encuentra", "Encuentra iumagen para $it")
                 output[it] = uri.toString()
+                if (output.count() == matchesCount) {
+                    setUpAdapter(output)
+                }
             })
         })
+    }
 
-        Log.d("Acaba", "Acaba la carga")
-
-
-
-        //matches_list.layoutManager = LinearLayoutManager(this.activity)
-        //matches_list.adapter = MatchListAdapter(presenter.getMatches(), { email -> sendMail(email) },{
-        //    view,url -> putCircularImage(view,url)
-        //})
+    private fun setUpAdapter(data:MutableMap<String, String>) {
+        matches_list.layoutManager = LinearLayoutManager(this.activity)
+        matches_list.adapter = MatchListAdapter(data, { email -> sendMail(email) },{
+            view,url -> putCircularImage(view,url)
+        })
     }
 
     override fun putCircularImage( view: ImageView,url: String) {
