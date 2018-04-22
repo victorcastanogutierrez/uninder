@@ -15,7 +15,7 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
             onFinish()
             view.hideIndeterminateLoading()
         } else {
-            Person.findAll({ persons ->
+            Person.findAll(FirebaseAuth.getInstance().currentUser!!.email, { persons ->
                 PersonsManager.loaded = true
                 PersonsManager.persons = persons
                 onFinish()

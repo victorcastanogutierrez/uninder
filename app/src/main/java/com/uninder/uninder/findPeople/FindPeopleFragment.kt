@@ -2,12 +2,9 @@ package com.uninder.uninder.findPeople
 
 
 import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +19,6 @@ import kotlinx.android.synthetic.main.find_people.*
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 import org.jetbrains.anko.yesButton
-
-private const val FIND_PEOPLE_FRAGMENT = "FIND_PEOPLE_FRAGMENT"
 
 class FindPeopleFragment : Fragment(), FindPeopleView {
 

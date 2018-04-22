@@ -32,7 +32,11 @@ data class Person(val name: String?, val description: String, val email: String?
             )
         }
 
-        fun findAll(onFinish: (MutableList<Person>) -> Unit) {
+        fun findAll(userEmail:String?, onFinish: (MutableList<Person>) -> Unit) {
+
+            val ref = database!!.getReference("")
+
+            //Loads all persons to like/dislike
             val personsListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val persons = mutableListOf<Person>()
@@ -50,8 +54,22 @@ data class Person(val name: String?, val description: String, val email: String?
                 }
             }
 
-            val ref = database!!.getReference("")
-            ref.child("users").addListenerForSingleValueEvent(personsListener)
+            //Loads current person data
+            val currentListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val currentUser = dataSnapshot.children.first().getValue<Person>(Person::class.java)
+                    ref.child("users").orderByChild("gender").equalTo(currentUser!!.genderLooked.toString())
+                            .addListenerForSingleValueEvent(personsListener)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.d("asd", "Error tt")
+                }
+            }
+
+            ref.child("users").orderByChild("email").equalTo(userEmail)
+                    .addListenerForSingleValueEvent(currentListener)
+
         }
 
         fun findPersonImage(person: Person?, onFinish: (Uri) -> Unit) {
