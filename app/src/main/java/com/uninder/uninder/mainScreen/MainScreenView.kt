@@ -26,4 +26,9 @@ interface MainScreenView {
      * Shows the welcome message to the user before init
      */
     fun showWelcomeMessage()
+
+    /**
+     * sends a notification
+     */
+    fun showNotifacion(text : String)
 }

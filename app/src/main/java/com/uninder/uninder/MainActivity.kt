@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         supportActionBar?.hide()
         this.presenter = MainScreenPresenterImpl(this, this)
         this.presenter.checkSetUp()
-        this.presenter.registerMatchesEvent();
+        this.presenter.registerMatchesEvent()
     }
 
     override fun askForPreferences() {
@@ -147,6 +147,12 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         indeterminateDialog.dismiss()
     }
 
+
+    override fun showNotifacion(text : String) {
+
+        mNotificationHelper.createNotification(text)
+
+    }
 
 
 }
