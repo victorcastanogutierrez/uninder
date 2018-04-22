@@ -10,15 +10,27 @@ import com.uninder.uninder.R
 import kotlinx.android.synthetic.main.get_matches.*
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.uninder.uninder.model.Person
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
+import org.jetbrains.anko.custom.async
+import org.jetbrains.anko.doAsync
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
+import javax.xml.transform.Result
+import kotlin.coroutines.experimental.suspendCoroutine
 
 
 class MatchesFragment : Fragment(), GetMatchesView {
 
 
-    private var presenter: GetMatchesPresenter = GetMatchesPresenterImpl()
+    private var presenter: GetMatchesPresenter = GetMatchesPresenterImpl(this)
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -29,18 +41,28 @@ class MatchesFragment : Fragment(), GetMatchesView {
 
     override fun onStart() {
         super.onStart()
-        initialise()
+        presenter.loadMatches()
     }
 
+    override fun onMatchesDataLoaded(data:MutableList<String>) {
+        val output = mutableMapOf<String, String>()
 
-    private fun initialise() {
-
-        matches_list.layoutManager = LinearLayoutManager(this.activity)
-        matches_list.adapter = MatchListAdapter(presenter.getMatches(), { email -> sendMail(email) },{
-            view,url -> putCircularImage(view,url)
+        data.forEach({
+            Log.d("Busca", "busca iumagen para $it")
+            Person.findPersonImage(it, { uri:Uri ->
+                Log.d("Encuentra", "Encuentra iumagen para $it")
+                output[it] = uri.toString()
+            })
         })
 
+        Log.d("Acaba", "Acaba la carga")
 
+
+
+        //matches_list.layoutManager = LinearLayoutManager(this.activity)
+        //matches_list.adapter = MatchListAdapter(presenter.getMatches(), { email -> sendMail(email) },{
+        //    view,url -> putCircularImage(view,url)
+        //})
     }
 
     override fun putCircularImage( view: ImageView,url: String) {
@@ -54,7 +76,6 @@ class MatchesFragment : Fragment(), GetMatchesView {
         intent.putExtra(Intent.EXTRA_EMAIL, mutableListOf<String>(email).toTypedArray())
         intent.putExtra(Intent.EXTRA_SUBJECT, "uninder")
         startActivity(intent)
-
     }
 
 }

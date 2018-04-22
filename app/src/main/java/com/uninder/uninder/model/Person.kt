@@ -82,16 +82,15 @@ data class Person(val name: String?, val description: String, val email: String?
 
         }
 
-        fun findPersonImage(person: Person?, onFinish: (Uri) -> Unit) {
+        fun findPersonImage(email:String?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
 
-
-            storage.child("${person?.email}/profilePic").downloadUrl.addOnSuccessListener({
-                onFinish(it)
+            storage.child("$email/profilePic").downloadUrl.addOnFailureListener({
+                onFinish(Uri.parse(PLACEHOLDER))
             })
 
-            storage.child("${person?.email}/profilePic").downloadUrl.addOnFailureListener({
-                onFinish(Uri.parse(PLACEHOLDER))
+            storage.child("$email/profilePic").downloadUrl.addOnSuccessListener({
+                onFinish(it)
             })
         }
 
