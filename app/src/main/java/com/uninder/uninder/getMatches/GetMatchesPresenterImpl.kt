@@ -27,6 +27,8 @@ class GetMatchesPresenterImpl(val view:GetMatchesView) : GetMatchesPresenter {
                 Person.findPersonImage(it, { uri:Uri ->
                     output[it] = uri.toString()
                     if (output.count() == matchesCount) {
+                        view.hideIndeterminateLoading()
+                        onFinish(output)
                     }
                 })
             })

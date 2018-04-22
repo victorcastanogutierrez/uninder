@@ -149,6 +149,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun showIndeterminateLoading() {
         this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.loadingContent))
+        this.indeterminateDialog.setCancelable(false)
         this.indeterminateDialog.show()
     }
 
