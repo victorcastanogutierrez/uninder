@@ -54,6 +54,9 @@ data class Person(val name: String?, val description: String, val email: String?
 
                                 persons.add(person)
                             }
+                            else{
+                                persons.add(person)
+                            }
                         }
                     })
                     onFinish(persons)

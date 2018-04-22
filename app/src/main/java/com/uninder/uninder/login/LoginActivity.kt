@@ -3,6 +3,7 @@ package com.uninder.uninder.login
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.util.Log
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -36,6 +37,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         configureGoogleApi()
 
