@@ -5,9 +5,8 @@ import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
@@ -18,7 +17,14 @@ import kotlinx.android.synthetic.main.card_person.*
 import kotlinx.android.synthetic.main.find_people.*
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.yesButton
+import android.text.method.Touch.onTouchEvent
+import android.widget.Toast
+import android.view.MotionEvent
+
+
+private const val MIN_DISTANCE = 100
 
 class FindPeopleFragment : Fragment(), FindPeopleView {
 
@@ -27,6 +33,10 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     private var currentPerson: Person? = null
 
     private lateinit var indeterminateDialog: Dialog
+
+    private var x1 = 0
+
+    private var x2 = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,12 +49,41 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         presenterImpl.loadData({ onDataLoaded() })
     }
 
-    private fun initialize(uri: Uri, person:Person?) {
+    private fun initialize(uri: Uri, person: Person?) {
         addImage(uri.toString())
         addData(person)
         currentPerson = person
         setUpButtons()
+        setUpSwipe()
     }
+
+    private fun setUpSwipe() {
+
+        cardInfoPerson.setOnTouchListener(View.OnTouchListener({ view, event ->
+            addSwipe(view, event)
+        }))
+    }
+
+    private fun addSwipe(view: View?, event: MotionEvent?): Boolean {
+
+        when (event?.getAction()) {
+            MotionEvent.ACTION_DOWN -> x1 = event.x.toInt()
+            MotionEvent.ACTION_UP -> {
+                x2 = event.x.toInt()
+                val deltaX = x2 - x1
+
+                if (deltaX < 0) {
+                    onDislike()
+
+                }
+                if (deltaX > 0) {
+                    onLike()
+                }
+            }
+        }
+        return true
+    }
+
 
     override fun onDataLoaded() {
         val person: Person? = presenterImpl.getNextPerson()
@@ -52,10 +91,10 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
             cardInfoPerson.visibility = View.INVISIBLE
             alert(getString(R.string.noMorePeople)) {
                 title = getString(R.string.noMorePeopleTitle)
-                yesButton {  }
+                yesButton { }
             }.show()
         } else {
-            presenterImpl.loadNextPersonImage(person, { uri:Uri ->
+            presenterImpl.loadNextPersonImage(person, { uri: Uri ->
                 initialize(uri, person)
             })
         }
@@ -63,27 +102,23 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     private fun setUpButtons() {
         likeBtn.setOnClickListener {
-            addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
-            presenterImpl.like(currentPerson)
-            this.onDataLoaded()
+            onLike()
         }
         dislikeBtn.setOnClickListener {
-            addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
-            presenterImpl.dislike(currentPerson)
-            this.onDataLoaded()
+            onDislike()
         }
     }
 
-    private fun addData(person:Person?){
+    private fun addData(person: Person?) {
         personName.text = person?.name
         personDescription.text = person?.description
     }
 
     private fun addImage(imageUrl: String) {
         Glide.with(this.context!!)
-            .load(imageUrl)
-            .apply(RequestOptions.circleCropTransform())
-            .into(personImage)
+                .load(imageUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(personImage)
     }
 
     private fun addAnimation(view: View, animation: Animation) {
@@ -99,5 +134,20 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     override fun hideIndeterminateLoading() {
         indeterminateDialog.dismiss()
     }
+
+
+    override fun onLike() {
+        addAnimation(likeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
+        presenterImpl.like(currentPerson)
+        this.onDataLoaded()
+    }
+
+    override fun onDislike() {
+        addAnimation(dislikeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
+        presenterImpl.dislike(currentPerson)
+        this.onDataLoaded()
+    }
+
+
 }
 

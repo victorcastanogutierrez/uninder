@@ -16,4 +16,15 @@ interface FindPeopleView {
      * Callback called when data is loaded
      */
     fun onDataLoaded()
+
+    /**
+     * Refresh the view to offer new user after left swipe or pressing dislike button
+     */
+    fun onDislike()
+
+    /**
+     * Refresh the view to offer new user after right swipe or pressing like button
+     */
+    fun onLike()
+
 }

@@ -54,6 +54,7 @@ data class Person(val name: String?, val description: String, val email: String?
 
                                 persons.add(person)
                             }
+
                         }
                     })
                     onFinish(persons)
@@ -85,19 +86,34 @@ data class Person(val name: String?, val description: String, val email: String?
         fun findPersonImage(email:String?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
 
-            storage.child("$email/profilePic").downloadUrl.addOnFailureListener({
+            storage.child(email!!.replace('.', '_') + "/profilePic").downloadUrl.addOnFailureListener({
                 onFinish(Uri.parse(PLACEHOLDER))
             })
 
-            storage.child("$email/profilePic").downloadUrl.addOnSuccessListener({
+            storage.child(email!!.replace('.', '_') + "/profilePic").downloadUrl.addOnSuccessListener({
                 onFinish(it)
+
             })
         }
 
         fun doLike(personLiked: Person?, email: String?, isLike: Boolean) {
             val ref = database!!.getReference("users")
-            ref.child("${personLiked?.email!!.replace('.', '_')}").child("likes").
-                    child("${email!!.replace('.', '_')}").setValue(isLike)
+            ref.child("${personLiked?.email!!.replace('.', '_')}").child("likes").child("${email!!.replace('.', '_')}").setValue(isLike)
+        }
+
+        fun uploadFileImage(imageRoute: Uri, currentUserMail: String, success: (String) -> Unit, error: () -> Unit) {
+
+            val storage = FirebaseStorage.getInstance().reference
+
+            val cloudStorage = storage.child("${currentUserMail!!.replace('.', '_')}/profilePic")
+            cloudStorage.putFile(imageRoute)
+                    .addOnSuccessListener({ taskSnapshot ->
+                        val downloadUrl = taskSnapshot.downloadUrl
+                        success(downloadUrl.toString())
+                    })
+                    .addOnFailureListener({
+                        error()
+                    })
         }
 
         fun findMatches(email:String?, onFinish: (MutableList<String>) -> Unit) {

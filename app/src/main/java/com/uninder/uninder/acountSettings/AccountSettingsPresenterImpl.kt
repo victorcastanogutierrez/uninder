@@ -3,8 +3,7 @@ package com.uninder.uninder.acountSettings
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import com.uninder.uninder.handler.ImageFirestoreHandler
-import com.uninder.uninder.handler.PersonsManager
+import com.google.firebase.auth.FirebaseAuth
 import com.uninder.uninder.model.Person
 import com.uninder.uninder.userPreferences.UserPreferences
 import com.uninder.uninder.userPreferences.UserPreferencesSharedImpl
@@ -12,25 +11,23 @@ import com.uninder.uninder.userPreferences.UserPreferencesSharedImpl
 
 class AccountSettingsPresenterImpl(private val view: AccountSettingsView, context: Context) : AccountSettingsPresenter {
 
-    private val imageFirestoreHandler: ImageFirestoreHandler
 
     private val sharedHelper: UserPreferences
 
     init {
         this.sharedHelper = UserPreferencesSharedImpl(context)
 
-        imageFirestoreHandler = ImageFirestoreHandler()
     }
 
 
     override fun editNameDialog(newValue: Any?) {
         Log.v("PREFERENCES_NAME", newValue.toString())
-        Person.update("name",newValue.toString())
+        Person.update("name", newValue.toString())
     }
 
     override fun editDescDialog(newValue: Any?) {
         Log.v("PREFERENCES_DESCRIPTION", newValue.toString())
-        Person.update("description",newValue.toString())
+        Person.update("description", newValue.toString())
 
     }
 
@@ -48,7 +45,7 @@ class AccountSettingsPresenterImpl(private val view: AccountSettingsView, contex
 
     override fun savePicture(contentURI: Uri) {
 
-        this.imageFirestoreHandler.uploadFile(contentURI, {
+        Person.uploadFileImage(contentURI, FirebaseAuth.getInstance().currentUser?.email!!, {
             this.view.showSuccessOnUploadPic()
         }, {
             this.view.showErrorOnUploadPic()
