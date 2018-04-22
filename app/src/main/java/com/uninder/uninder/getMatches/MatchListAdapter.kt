@@ -21,7 +21,7 @@ class MatchListAdapter(private val persons: Map<String, String>, private val sen
             putImage(itemView.matchImage, entry.second)
             itemView.matchButton.setOnClickListener {
                 if (entry.first != null) {
-                    sendMail(entry.second)
+                    sendMail(entry.first)
                 }
             }
 

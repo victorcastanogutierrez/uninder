@@ -9,4 +9,14 @@ interface GetMatchesView {
     fun putCircularImage(view: ImageView, url: String)
 
     fun onMatchesDataLoaded(data:MutableList<String>)
+
+    /**
+     * Shows an inderterminate loading bar
+     */
+    fun showIndeterminateLoading()
+
+    /**
+     * Hides the indeterminate loading bar
+     */
+    fun hideIndeterminateLoading()
 }

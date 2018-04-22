@@ -1,5 +1,6 @@
 package com.uninder.uninder.getMatches
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,11 +15,14 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.uninder.uninder.model.Person
+import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 
 
 class MatchesFragment : Fragment(), GetMatchesView {
 
     private var presenter: GetMatchesPresenter = GetMatchesPresenterImpl(this)
+
+    private lateinit var indeterminateDialog: Dialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,17 +36,7 @@ class MatchesFragment : Fragment(), GetMatchesView {
     }
 
     override fun onMatchesDataLoaded(data:MutableList<String>) {
-        val output = mutableMapOf<String, String>()
-        val matchesCount = data.count()
-
-        data.forEach({
-            Person.findPersonImage(it, { uri:Uri ->
-                output[it] = uri.toString()
-                if (output.count() == matchesCount) {
-                    setUpAdapter(output)
-                }
-            })
-        })
+        presenter.loadMatchesImages(data, { setUpAdapter(it) })
     }
 
     private fun setUpAdapter(data:MutableMap<String, String>) {
@@ -63,6 +57,15 @@ class MatchesFragment : Fragment(), GetMatchesView {
         intent.putExtra(Intent.EXTRA_EMAIL, mutableListOf<String>(email).toTypedArray())
         intent.putExtra(Intent.EXTRA_SUBJECT, "uninder")
         startActivity(intent)
+    }
+
+    override fun showIndeterminateLoading() {
+        this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.loadingContent))
+        this.indeterminateDialog.show()
+    }
+
+    override fun hideIndeterminateLoading() {
+        indeterminateDialog.dismiss()
     }
 
 }
