@@ -83,17 +83,15 @@ data class Person(val name: String?, val description: String, val email: String?
 
         }
 
-        fun findPersonImage(person: Person?, onFinish: (Uri) -> Unit) {
+        fun findPersonImage(email: String?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
-
-            val denormalizedMail = person?.email?.replace('.', '_')
-
-            storage.child("$denormalizedMail/profilePic").downloadUrl.addOnSuccessListener({
-                onFinish(it)
+            
+            storage.child(email!!.replace('.', '_') + "/profilePic").downloadUrl.addOnFailureListener({
+                onFinish(Uri.parse(PLACEHOLDER))
             })
 
-            storage.child("${person?.email?.replace('.', '_')}}/profilePic").downloadUrl.addOnFailureListener({
-                onFinish(Uri.parse(PLACEHOLDER))
+            storage.child(email!!.replace('.', '_') + "/profilePic").downloadUrl.addOnSuccessListener({
+                onFinish(it)
             })
         }
 
@@ -117,6 +115,25 @@ data class Person(val name: String?, val description: String, val email: String?
                     })
         }
 
+        fun findMatches(email: String?, onFinish: (MutableList<String>) -> Unit) {
+            val ref = database!!.getReference("")
+            val matchesListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val result = mutableListOf<String>()
+                    dataSnapshot.children.forEach({
+                        result.add(it.value.toString())
+                    })
+                    onFinish(result)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.d("asd", "Error tt")
+                }
+            }
+
+            ref.child("users").child(email!!.replace('.', '_') + "/matches")
+                    .addListenerForSingleValueEvent(matchesListener)
+        }
 
     }
 }

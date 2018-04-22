@@ -31,7 +31,7 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
     }
 
     override fun loadNextPersonImage(person:Person?, onFinish: (uri: Uri) -> Unit) {
-        Person.findPersonImage(person, { uriLoaded:Uri ->
+        Person.findPersonImage(person!!.email!!.replace('.', '_'), { uriLoaded:Uri ->
             onFinish(uriLoaded)
             view.hideIndeterminateLoading()
         })
