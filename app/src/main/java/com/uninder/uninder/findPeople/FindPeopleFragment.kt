@@ -95,6 +95,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
                 title = getString(R.string.noMorePeopleTitle)
                 yesButton { }
             }.show()
+            hideIndeterminateLoading()
         } else {
             presenterImpl.loadNextPersonImage(person, { uri: Uri ->
                 initialize(uri, person)
