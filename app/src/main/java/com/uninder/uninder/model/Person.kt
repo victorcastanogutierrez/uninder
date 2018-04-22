@@ -86,8 +86,9 @@ data class Person(val name: String?, val description: String, val email: String?
         fun findPersonImage(person: Person?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
 
+            val denormalizedMail = person?.email?.replace('.', '_')
 
-            storage.child("${person?.email?.replace('.', '_')}}/profilePic").downloadUrl.addOnSuccessListener({
+            storage.child("$denormalizedMail/profilePic").downloadUrl.addOnSuccessListener({
                 onFinish(it)
             })
 

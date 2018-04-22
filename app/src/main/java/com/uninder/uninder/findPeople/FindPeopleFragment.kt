@@ -86,7 +86,9 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
 
     override fun onDataLoaded() {
+
         val person: Person? = presenterImpl.getNextPerson()
+
         if (null == person) {
             cardInfoPerson.visibility = View.INVISIBLE
             alert(getString(R.string.noMorePeople)) {

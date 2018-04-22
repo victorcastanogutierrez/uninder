@@ -26,7 +26,8 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
     }
 
     override fun getNextPerson(): Person? {
-        return if (PersonsManager.persons.isEmpty()) null else PersonsManager.persons.removeAt(0)
+
+        return if (PersonsManager.persons.isEmpty()) null else PersonsManager.persons.elementAt(0)
     }
 
     override fun loadNextPersonImage(person:Person?, onFinish: (uri: Uri) -> Unit) {
@@ -37,10 +38,12 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
     }
 
     override fun like(person: Person?) {
+        PersonsManager.persons.removeAt(0)
         Person.doLike(person, FirebaseAuth.getInstance().currentUser!!.email,true)
     }
 
     override fun dislike(person: Person?) {
+        PersonsManager.persons.removeAt(0)
         Person.doLike(person,FirebaseAuth.getInstance().currentUser!!.email,false)
 
     }
