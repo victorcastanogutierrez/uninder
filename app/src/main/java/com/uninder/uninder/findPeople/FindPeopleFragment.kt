@@ -138,7 +138,6 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         indeterminateDialog.dismiss()
     }
 
-
     override fun onLike() {
         addAnimation(likeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
         presenterImpl.like(currentPerson)
