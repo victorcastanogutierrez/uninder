@@ -97,8 +97,8 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         val person: Person? = presenterImpl.getNextPerson()
         cardInfoPerson.visibility = View.VISIBLE
         if (null == person) {
-            currentPerson = null
             noMoreResults()
+            cardInfoPerson.setOnTouchListener(null)
             alert(getString(R.string.noMorePeople)) {
                 title = getString(R.string.noMorePeopleTitle)
                 yesButton { }
