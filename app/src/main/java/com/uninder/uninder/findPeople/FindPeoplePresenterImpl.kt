@@ -35,11 +35,11 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
     }
 
     override fun like(person: Person?) {
-        Person.doLike(person, FirebaseAuth.getInstance().currentUser!!.email)
+        Person.doLike(person, FirebaseAuth.getInstance().currentUser!!.email,true)
     }
 
     override fun dislike(person: Person?) {
-        Person.doDislike(person,FirebaseAuth.getInstance().currentUser!!.email)
+        Person.doLike(person,FirebaseAuth.getInstance().currentUser!!.email,false)
 
     }
 }

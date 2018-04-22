@@ -32,7 +32,10 @@ data class Person(val name: String?, val description: String, val email: String?
             )
         }
 
-        fun findAll(userEmail:String?, onFinish: (MutableList<Person>) -> Unit) {
+
+
+
+        fun findAll(userEmail: String?, onFinish: (MutableList<Person>) -> Unit) {
 
             val ref = database!!.getReference("")
 
@@ -79,16 +82,13 @@ data class Person(val name: String?, val description: String, val email: String?
             })
         }
 
-        fun doLike(personLiked: Person?, email: String?) {
+        fun doLike(personLiked: Person?, email: String?,isLike :Boolean) {
             val ref = database!!.getReference("likes")
-            ref.child("${email!!.replace('.', '_')}").child("${personLiked?.email?.replace('.', '_')}").setValue(true
+            ref.child("${email!!.replace('.', '_')}").child("${personLiked?.email?.replace('.', '_')}").setValue(isLike
+
             )
         }
 
-        fun doDislike(personDisLiked: Person?, email: String?) {
-            val ref = database!!.getReference("dislikes")
-            ref.child("${email!!.replace('.', '_')}").child("${personDisLiked?.email?.replace('.', '_')}").setValue(true
-            )
-        }
+
     }
 }
