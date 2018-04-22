@@ -8,6 +8,7 @@ import com.uninder.uninder.model.Person
 
 class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) : FindPeoplePresenter {
 
+
     override fun loadData(onFinish: () -> Unit) {
         view.showIndeterminateLoading()
         if (PersonsManager.loaded) {
@@ -34,5 +35,10 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
 
     override fun like(person: Person?) {
         Person.doLike(person, FirebaseAuth.getInstance().currentUser!!.email)
+    }
+
+    override fun dislike(person: Person?) {
+        Person.doDislike(person,FirebaseAuth.getInstance().currentUser!!.email)
+
     }
 }

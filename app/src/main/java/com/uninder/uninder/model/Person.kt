@@ -11,6 +11,7 @@ data class Person(val name: String?, val description: String, val email: String?
     constructor() : this("", "", "", null, null)
 
     companion object {
+
         private val database: FirebaseDatabase? = FirebaseDatabase.getInstance()
         private val currentUser = FirebaseAuth.getInstance().currentUser
 
@@ -22,7 +23,7 @@ data class Person(val name: String?, val description: String, val email: String?
                             Gender.get(gender), Gender.get(searchGender)))
         }
 
-        fun update(propertyKey :String , newName: String) {
+        fun update(propertyKey: String, newName: String) {
 
             val ref = database!!.getReference("")
 
@@ -53,17 +54,25 @@ data class Person(val name: String?, val description: String, val email: String?
             ref.child("users").addListenerForSingleValueEvent(personsListener)
         }
 
-        fun findPersonImage(person:Person?, onFinish: (Uri) -> Unit) {
+        fun findPersonImage(person: Person?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
             storage.child("${person?.email}/profilePic").downloadUrl.addOnSuccessListener({
                 onFinish(it)
             })
         }
 
-        fun doLike(personLiked:Person?, email:String?) {
+        fun doLike(personLiked: Person?, email: String?) {
             val ref = database!!.getReference("")
             ref.child("likes").child(email!!.replace('.', '_'))
                     .updateChildren(mutableMapOf())
+        }
+
+        fun doDislike(personDisLiked: Person?, email: String?) {
+            val ref = database!!.getReference("dislikes")
+            ref.child("${email!!.replace('.', '_')}").child("${personDisLiked?.email?.replace('.', '_')}").setValue(true
+            )
+
+
         }
     }
 }

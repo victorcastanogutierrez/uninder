@@ -16,12 +16,17 @@ interface FindPeoplePresenter {
     fun getNextPerson(): Person?
 
     /**
-     * Loads the proffile picture of a Person
+     * Loads the profile picture of a Person
      */
-    fun loadNextPersonImage(person:Person?, onFinish: (uri: Uri) -> Unit)
+    fun loadNextPersonImage(person: Person?, onFinish: (uri: Uri) -> Unit)
 
     /**
      * Handles like to a Person
      */
     fun like(person: Person?)
+
+    /**
+     * Handles dislinking  a Person
+     */
+    fun dislike(person: Person?)
 }

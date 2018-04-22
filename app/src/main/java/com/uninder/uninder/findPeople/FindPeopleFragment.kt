@@ -45,10 +45,11 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         addImage(uri.toString())
         addData(person)
         currentPerson = person
+        setUpButtons()
+
     }
 
     override fun onDataLoaded() {
-        setUpButtons()
 
         val person: Person? = presenterImpl.getNextPerson()
         Log.d("Busca", "Busca el siguiente $person")
@@ -64,6 +65,8 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         }
         dislikeBtn.setOnClickListener {
             addAnimation(it, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
+            presenterImpl.dislike(currentPerson)
+            this.onDataLoaded()
         }
     }
 

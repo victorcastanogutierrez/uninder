@@ -27,7 +27,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/personGuide1"
-            card_view:srcCompat="@drawable/penaldo" />
+             />
 
         <android.support.constraint.Guideline
             android:id="@+id/personGuide1"
@@ -116,7 +116,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Soy un chico de Madeira  Portugal , guapo rico y que juega bien al futbol, hago chilenas en cuartos de final de shempions"
+            android:text=""
             android:textAppearance="@android:style/TextAppearance.Material.Medium"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/personGuide2"
@@ -148,7 +148,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Penaldo"
+            android:text=""
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
             app:layout_constraintBottom_toTopOf="@+id/personImage"
