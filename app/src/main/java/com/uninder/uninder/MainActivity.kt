@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         supportActionBar?.hide()
         this.presenter = MainScreenPresenterImpl(this, this)
         this.presenter.checkSetUp()
+        this.presenter.registerMatchesEvent();
     }
 
     override fun askForPreferences() {
@@ -140,5 +142,7 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
     override fun hideIndeterminateLoading() {
         indeterminateDialog.dismiss()
     }
+
+
 
 }
