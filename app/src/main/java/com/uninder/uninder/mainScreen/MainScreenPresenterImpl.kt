@@ -29,7 +29,7 @@ class MainScreenPresenterImpl (private val view:MainScreenView, private val cont
         val userPref:UserPreferences = UserPreferencesSharedImpl(context)
         userPref.saveBooleanValue(UserPreferencesSharedImpl.PREFS_ALREADY_SETUP, true)
         view.hideIndeterminateLoading()
-        view.initialize()
+        view.showWelcomeMessage()
     }
 
 }

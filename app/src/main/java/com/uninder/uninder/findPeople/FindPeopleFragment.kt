@@ -4,6 +4,7 @@ package com.uninder.uninder.findPeople
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
@@ -45,6 +46,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun onStart() {
         super.onStart()
+        cardInfoPerson.visibility = View.INVISIBLE
         presenterImpl.loadData({ onDataLoaded() })
     }
 
@@ -88,9 +90,10 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     override fun onDataLoaded() {
 
         val person: Person? = presenterImpl.getNextPerson()
-
+        cardInfoPerson.visibility = View.VISIBLE
         if (null == person) {
             noMoreResults()
+            cardInfoPerson.setOnTouchListener(null)
             alert(getString(R.string.noMorePeople)) {
                 title = getString(R.string.noMorePeopleTitle)
                 yesButton { }

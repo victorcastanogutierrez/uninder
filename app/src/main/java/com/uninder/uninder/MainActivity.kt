@@ -91,6 +91,15 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         }.show()
     }
 
+    override fun showWelcomeMessage() {
+        alert(getString(R.string.welcomeMessageBody)) {
+            title = getString(R.string.welcomeMessageTitle)
+            yesButton {
+                initialize()
+            }
+        }.show()
+    }
+
     override fun initialize() {
         navigation.selectedItemId = R.id.menu_search
         onSelectedMenuBottom()
