@@ -3,31 +3,28 @@ package com.uninder.uninder.getMatches
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.uninder.uninder.R
-import com.uninder.uninder.model.Person
 import kotlinx.android.synthetic.main.card_match.view.*
 
-class MatchListAdapter(private val personas: List<Person>, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
+class MatchListAdapter(private val persons: Map<String, String>, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
     : RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
 
     class ViewHolder(val cardView: CardView, val sendMail: (String) -> Unit, val putImage: (ImageView, String) -> Unit)
         : RecyclerView.ViewHolder(cardView) {
 
-        fun bindForecast(person: Person) {
+        fun bindMatch(entry: Pair<String, String>) {
 
-            with(person) {
 
-                itemView.matchTitle.text = name
-                putImage(itemView.matchImage, "https://www.infobae.com/new-resizer/4F6iYLIjE7hXne2slDNaA3hKEAU=/600x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2018/02/14180759/PSG-Real-Madrid-festejo-Cristiano-Ronaldo-1.jpg")
-                itemView.matchButton.setOnClickListener {
-                    if (email != null) {
-                        sendMail(email)
-                    }
+            itemView.matchTitle.text = entry.first
+            putImage(itemView.matchImage, entry.second)
+            itemView.matchButton.setOnClickListener {
+                if (entry.first != null) {
+                    sendMail(entry.second)
                 }
             }
+
         }
 
     }
@@ -40,9 +37,9 @@ class MatchListAdapter(private val personas: List<Person>, val sendMail: (String
         return ViewHolder(view, sendMail, putImage)
     }
 
-    override fun getItemCount() = personas.size
+    override fun getItemCount() = persons.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindForecast(personas[position])
+        holder.bindMatch(persons.toList().get(position))
     }
 }

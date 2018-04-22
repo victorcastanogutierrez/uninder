@@ -45,6 +45,7 @@ class MatchesFragment : Fragment(), GetMatchesView {
     }
 
     override fun onMatchesDataLoaded(data:MutableList<String>) {
+
         val output = mutableMapOf<String, String>()
 
         data.forEach({
