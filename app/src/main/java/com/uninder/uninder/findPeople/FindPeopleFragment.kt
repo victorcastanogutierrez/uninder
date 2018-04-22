@@ -90,7 +90,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         val person: Person? = presenterImpl.getNextPerson()
 
         if (null == person) {
-            cardInfoPerson.visibility = View.INVISIBLE
+            noMoreResults()
             alert(getString(R.string.noMorePeople)) {
                 title = getString(R.string.noMorePeopleTitle)
                 yesButton { }
@@ -101,6 +101,19 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
                 initialize(uri, person)
             })
         }
+    }
+
+    private fun noMoreResults(){
+
+        likeBtn.visibility =View.INVISIBLE
+        dislikeBtn.visibility =View.INVISIBLE
+        personDescription.visibility = View.INVISIBLE
+        personName.visibility = View.INVISIBLE
+        Glide.with(this.context!!)
+                .load(R.drawable.later)
+                .into(personImage)
+
+
     }
 
     private fun setUpButtons() {
