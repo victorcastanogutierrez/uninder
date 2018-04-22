@@ -2,12 +2,11 @@ package com.uninder.uninder.findPeople
 
 
 import android.app.Dialog
-import android.app.Notification
+import android.content.Intent
 import android.net.Uri
 import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -19,15 +18,11 @@ import kotlinx.android.synthetic.main.card_person.*
 import kotlinx.android.synthetic.main.find_people.*
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.indeterminateProgressDialog
-import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.yesButton
-import android.text.method.Touch.onTouchEvent
-import android.widget.Toast
 import android.view.MotionEvent
 import com.uninder.uninder.handler.NotificationHelper
+import android.provider.Settings
 
-
-private const val MIN_DISTANCE = 100
 
 class FindPeopleFragment : Fragment(), FindPeopleView {
 
@@ -56,7 +51,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     }
 
     private fun initialize(uri: Uri, person: Person?) {
-        mNotificationHelper = NotificationHelper(this.activity!!)
+        mNotificationHelper = NotificationHelper(this.context!!)
         addImage(uri.toString())
         addData(person)
         currentPerson = person
@@ -152,7 +147,6 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun showIndeterminateLoading() {
         this.indeterminateDialog = indeterminateProgressDialog(getString(R.string.loadingContent))
-        this.indeterminateDialog.setCancelable(false)
         this.indeterminateDialog.show()
     }
 
@@ -162,20 +156,27 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun onLike() {
 
-        mNotificationHelper.notify(id, mNotificationHelper.getNotificationFollower(
-                getString(R.string.matches),
-                getString(R.string.matches)))
-        
+        mNotificationHelper.createNotification("MATCH con JC")
 
+
+        /**
         addAnimation(likeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
         presenterImpl.like(currentPerson)
         this.onDataLoaded()
+         */
     }
 
     override fun onDislike() {
+
+        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, "com.uninder.uninder")
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "default")
+        startActivity(intent)
+/*
         addAnimation(dislikeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
         presenterImpl.dislike(currentPerson)
         this.onDataLoaded()
+        */
     }
 
 
