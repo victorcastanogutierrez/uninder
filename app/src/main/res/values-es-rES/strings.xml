@@ -42,4 +42,7 @@
 
     <string name="newmatch">Match</string>
 
+    <string name="welcomeMessageBody">Hemos guardado tus preferencias. No olvides subir una foto tuya en configuración y así tendrás más posibilidades ;)</string>
+    <string name="welcomeMessageTitle">¡Bienvenido!</string>
+
 </resources>
