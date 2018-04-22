@@ -1,5 +1,6 @@
 package com.uninder.uninder.model
 
+import android.app.Notification
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +33,7 @@ data class Person(val name: String?, val description: String, val email: String?
                     newName
             )
         }
+
 
 
         fun findAll(userEmail: String?, onFinish: (MutableList<Person>) -> Unit) {

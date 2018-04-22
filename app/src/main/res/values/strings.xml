@@ -37,4 +37,8 @@
     <string name="loadingContent">Loading...</string>
     <string name="noMorePeopleTitle">Done for today</string>
     <string name="noMorePeople">There are no more people, you will have to wait :(</string>
+
+    <string name="newmatch">Match</string>
+
+
 </resources>

@@ -2,6 +2,7 @@ package com.uninder.uninder.findPeople
 
 
 import android.app.Dialog
+import android.app.Notification
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -22,6 +23,7 @@ import org.jetbrains.anko.yesButton
 import android.text.method.Touch.onTouchEvent
 import android.widget.Toast
 import android.view.MotionEvent
+import com.uninder.uninder.handler.NotificationHelper
 
 
 private const val MIN_DISTANCE = 100
@@ -33,6 +35,8 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     private var currentPerson: Person? = null
 
     private lateinit var indeterminateDialog: Dialog
+
+    private lateinit var mNotificationHelper: NotificationHelper
 
     private var x1 = 0
 
@@ -50,6 +54,7 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     }
 
     private fun initialize(uri: Uri, person: Person?) {
+        mNotificationHelper = NotificationHelper(this.activity!!)
         addImage(uri.toString())
         addData(person)
         currentPerson = person
@@ -103,10 +108,10 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
         }
     }
 
-    private fun noMoreResults(){
+    private fun noMoreResults() {
 
-        likeBtn.visibility =View.INVISIBLE
-        dislikeBtn.visibility =View.INVISIBLE
+        likeBtn.visibility = View.INVISIBLE
+        dislikeBtn.visibility = View.INVISIBLE
         personDescription.visibility = View.INVISIBLE
         personName.visibility = View.INVISIBLE
         Glide.with(this.context!!)
@@ -152,6 +157,12 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     }
 
     override fun onLike() {
+
+        mNotificationHelper.notify(id, mNotificationHelper.getNotificationFollower(
+                getString(R.string.matches),
+                getString(R.string.matches)))
+        
+
         addAnimation(likeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
         presenterImpl.like(currentPerson)
         this.onDataLoaded()
