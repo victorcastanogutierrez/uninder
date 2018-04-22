@@ -16,18 +16,21 @@ class GetMatchesPresenterImpl(val view:GetMatchesView) : GetMatchesPresenter {
     override fun loadMatchesImages(dataList:MutableList<String>,
                                    onFinish: (data: MutableMap<String, String>) -> Unit) {
 
-        val output = mutableMapOf<String, String>()
-        val matchesCount = dataList.count()
+        if (dataList.isEmpty()) {
+            view.hideIndeterminateLoading()
+            onFinish(mutableMapOf())
+        } else {
+            val output = mutableMapOf<String, String>()
+            val matchesCount = dataList.count()
 
-        dataList.forEach({
-            Person.findPersonImage(it, { uri:Uri ->
-                output[it] = uri.toString()
-                if (output.count() == matchesCount) {
-                    view.hideIndeterminateLoading()
-                    onFinish(output)
-                }
+            dataList.forEach({
+                Person.findPersonImage(it, { uri:Uri ->
+                    output[it] = uri.toString()
+                    if (output.count() == matchesCount) {
+                    }
+                })
             })
-        })
+        }
     }
 
 }

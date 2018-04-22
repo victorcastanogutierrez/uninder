@@ -37,6 +37,7 @@ class MatchesFragment : Fragment(), GetMatchesView {
 
     override fun onMatchesDataLoaded(data:MutableList<String>) {
         presenter.loadMatchesImages(data, { setUpAdapter(it) })
+
     }
 
     private fun setUpAdapter(data:MutableMap<String, String>) {
