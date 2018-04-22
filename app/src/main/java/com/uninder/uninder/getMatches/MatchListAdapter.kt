@@ -17,11 +17,12 @@ class MatchListAdapter(private val persons: Map<String, String>, private val sen
         : RecyclerView.ViewHolder(cardView) {
 
         fun bindMatch(entry: Pair<String, String>) {
-            itemView.matchTitle.text = entry.first
+            val denormalizedMail = "${entry.first.substringBefore("@")}@${entry.first.substringAfter("@").replace("_", ".")}"
+            itemView.matchTitle.text = denormalizedMail
             putImage(itemView.matchImage, entry.second)
             itemView.matchButton.setOnClickListener {
-                if (entry.first != null) {
-                    sendMail(entry.first)
+                if (denormalizedMail != null) {
+                    sendMail(denormalizedMail)
                 }
             }
 
