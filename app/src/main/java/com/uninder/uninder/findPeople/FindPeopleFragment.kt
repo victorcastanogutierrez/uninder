@@ -155,16 +155,13 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     override fun onLike() {
 
 
-        /**
         addAnimation(likeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
         presenterImpl.like(currentPerson)
         this.onDataLoaded()
-         */
+
     }
 
     override fun onDislike() {
-
-
 
         addAnimation(dislikeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
         presenterImpl.dislike(currentPerson)
