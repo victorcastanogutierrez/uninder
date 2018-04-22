@@ -1,5 +1,6 @@
 package com.uninder.uninder.getMatches
 
+import com.google.firebase.auth.FirebaseAuth
 import com.uninder.uninder.model.Gender
 import com.uninder.uninder.model.Person
 
@@ -13,10 +14,10 @@ class GetMatchesPresenterImpl : GetMatchesPresenter {
 
     )
 
-    override fun getMatches(): MutableList<Person> {
-
-        return this.persons
-
+    override fun loadMatches() {
+        Person.findMatches(FirebaseAuth.getInstance().currentUser!!.email, {
+            
+        })
     }
 
 }

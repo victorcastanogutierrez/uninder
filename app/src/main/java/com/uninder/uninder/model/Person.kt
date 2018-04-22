@@ -101,6 +101,25 @@ data class Person(val name: String?, val description: String, val email: String?
                     child("${email!!.replace('.', '_')}").setValue(isLike)
         }
 
+        fun findMatches(email:String?, onFinish: (MutableList<String>) -> Unit) {
+            val ref = database!!.getReference("")
+            val matchesListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val result = mutableListOf<String>()
+                    dataSnapshot.children.forEach({
+                        result.add(it.value.toString())
+                    })
+                    onFinish(result)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.d("asd", "Error tt")
+                }
+            }
+
+            ref.child("users").child(email!!.replace('.', '_') + "/matches")
+                    .addListenerForSingleValueEvent(matchesListener)
+        }
 
     }
 }
