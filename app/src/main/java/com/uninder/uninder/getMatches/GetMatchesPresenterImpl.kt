@@ -7,9 +7,9 @@ class GetMatchesPresenterImpl : GetMatchesPresenter {
 
 
     private val persons = mutableListOf<Person>(
-            Person("pepe", "Soy pepe tiooo", "pepe@pepe.es", Gender.MALE, Gender.FEMALE)
-            , Person("jose", "Soy pepe tiooo", "jose@gmail.es", Gender.MALE, Gender.FEMALE)
-            , Person("pepa", "Soy pepe tiooo", "luis@gmail.es", Gender.MALE, Gender.FEMALE)
+            Person("pepe", "Soy pepe tiooo", "pepe@pepe.es", Gender.MALE, Gender.FEMALE, mapOf())
+            , Person("jose", "Soy pepe tiooo", "jose@gmail.es", Gender.MALE, Gender.FEMALE, mapOf())
+            , Person("pepa", "Soy pepe tiooo", "luis@gmail.es", Gender.MALE, Gender.FEMALE, mapOf())
 
     )
 

@@ -6,9 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 
-data class Person(val name: String?, val description: String, val email: String?, val gender: Gender?, val genderLooked: Gender?) {
+data class Person(val name: String?, val description: String, val email: String?, val gender: Gender?, val genderLooked: Gender?, val likes: Map<String, Boolean>?) {
 
-    constructor() : this("", "", "", null, null)
+    constructor() : this("", "", "", null, null, null)
 
     companion object {
 
@@ -20,7 +20,7 @@ data class Person(val name: String?, val description: String, val email: String?
 
             ref.child("users").child(currentUser!!.email!!.replace('.', '_'))
                     .setValue(Person(currentUser.displayName, description, currentUser.email,
-                            Gender.get(gender), Gender.get(searchGender)))
+                            Gender.get(gender), Gender.get(searchGender), null))
         }
 
         fun update(propertyKey: String, newName: String) {
@@ -33,8 +33,6 @@ data class Person(val name: String?, val description: String, val email: String?
         }
 
 
-
-
         fun findAll(userEmail: String?, onFinish: (MutableList<Person>) -> Unit) {
 
             val ref = database!!.getReference("")
@@ -45,8 +43,16 @@ data class Person(val name: String?, val description: String, val email: String?
                     val persons = mutableListOf<Person>()
                     dataSnapshot.children.forEach({
                         val person = it.getValue<Person>(Person::class.java)
+
                         if (!person!!.email.equals(currentUser!!.email)) {
-                            persons.add(person)
+                            val denormalizedMail = currentUser!!.email.toString().replace('.', '_')
+                            if (null == person!!.likes) {
+                                persons.add(person)
+
+                            } else if (!person!!.likes!!.containsKey(denormalizedMail)) {
+
+                                persons.add(person)
+                            }
                         }
                     })
                     onFinish(persons)
@@ -82,11 +88,10 @@ data class Person(val name: String?, val description: String, val email: String?
             })
         }
 
-        fun doLike(personLiked: Person?, email: String?,isLike :Boolean) {
-            val ref = database!!.getReference("likes")
-            ref.child("${email!!.replace('.', '_')}").child("${personLiked?.email?.replace('.', '_')}").setValue(isLike
-
-            )
+        fun doLike(personLiked: Person?, email: String?, isLike: Boolean) {
+            val ref = database!!.getReference("users")
+            ref.child("${personLiked?.email!!.replace('.', '_')}").child("likes").
+                    child("${email!!.replace('.', '_')}").setValue(isLike)
         }
 
 

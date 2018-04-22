@@ -10,6 +10,8 @@ class FindPeoplePresenterImpl (val context: Context?, val view:FindPeopleView) :
 
 
     override fun loadData(onFinish: () -> Unit) {
+
+
         view.showIndeterminateLoading()
         if (PersonsManager.loaded) {
             onFinish()
