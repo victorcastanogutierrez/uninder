@@ -14,6 +14,7 @@ data class Person(val name: String?, val description: String, val email: String?
 
         private val database: FirebaseDatabase? = FirebaseDatabase.getInstance()
         private val currentUser = FirebaseAuth.getInstance().currentUser
+        private const val PLACEHOLDER = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
 
         fun savePersonSettings(description: String, gender: Int, searchGender: Int) {
             val ref = database!!.getReference("")
@@ -83,8 +84,14 @@ data class Person(val name: String?, val description: String, val email: String?
 
         fun findPersonImage(person: Person?, onFinish: (Uri) -> Unit) {
             val storage = FirebaseStorage.getInstance().reference
+
+
             storage.child("${person?.email}/profilePic").downloadUrl.addOnSuccessListener({
                 onFinish(it)
+            })
+
+            storage.child("${person?.email}/profilePic").downloadUrl.addOnFailureListener({
+                onFinish(Uri.parse(PLACEHOLDER))
             })
         }
 
