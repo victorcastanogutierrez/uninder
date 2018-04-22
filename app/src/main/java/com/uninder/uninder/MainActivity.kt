@@ -91,15 +91,20 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
         }.show()
     }
 
-    override fun initialize() {
-        navigation.selectedItemId = R.id.menu_search
-        onSelectedMenuBottom()
+    override fun showWelcomeMessage() {
         alert(getString(R.string.welcomeMessageBody)) {
             title = getString(R.string.welcomeMessageTitle)
             yesButton {
-                supportFragmentManager.beginTransaction().add(mainContainer.id, FindPeopleFragment()).commit()
+                initialize()
             }
         }.show()
+    }
+
+    override fun initialize() {
+        navigation.selectedItemId = R.id.menu_search
+        onSelectedMenuBottom()
+        supportFragmentManager.beginTransaction().add(mainContainer.id, FindPeopleFragment()).commit()
+
     }
 
     private fun onSelectedMenuBottom() {
