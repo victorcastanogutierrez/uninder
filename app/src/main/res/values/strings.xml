@@ -39,6 +39,9 @@
     <string name="noMorePeople">There are no more people, you will have to wait :(</string>
 
     <string name="newmatch">Match</string>
+    <string name="notification">Notifications</string>
+
+
 
     <string name="welcomeMessageBody">We have saved your preferences. Do not forget to upload a profile picture right down in configuration section, you will have more opportunities ;)</string>
     <string name="welcomeMessageTitle">Welcome!</string>

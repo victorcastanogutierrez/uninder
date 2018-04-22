@@ -11,7 +11,6 @@ import com.uninder.uninder.userPreferences.UserPreferencesSharedImpl
 
 class AccountSettingsPresenterImpl(private val view: AccountSettingsView, context: Context) : AccountSettingsPresenter {
 
-
     private val sharedHelper: UserPreferences
 
     init {
@@ -41,6 +40,10 @@ class AccountSettingsPresenterImpl(private val view: AccountSettingsView, contex
 
         listener?.closeSession()
 
+    }
+
+    override fun goToNotificationSettings() {
+        this.view.startNotificationsIntent()
     }
 
     override fun savePicture(contentURI: Uri) {

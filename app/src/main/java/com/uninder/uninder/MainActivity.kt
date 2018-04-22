@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.uninder.uninder.acountSettings.AccountSettingsFragment
 import com.uninder.uninder.findPeople.FindPeopleFragment
 import com.uninder.uninder.getMatches.MatchesFragment
+import com.uninder.uninder.handler.NotificationHelper
 import com.uninder.uninder.mainScreen.MainScreenPresenter
 import com.uninder.uninder.mainScreen.MainScreenPresenterImpl
 import com.uninder.uninder.mainScreen.MainScreenView
@@ -25,9 +26,13 @@ class MainActivity : AppCompatActivity(), MainScreenView, AccountSettingsFragmen
 
     private lateinit var indeterminateDialog: Dialog
 
+    private lateinit var mNotificationHelper: NotificationHelper
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mNotificationHelper = NotificationHelper(this)
         this.requestedOrientation =ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
         this.presenter = MainScreenPresenterImpl(this, this)

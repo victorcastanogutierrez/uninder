@@ -26,6 +26,10 @@
             android:key="preference_change_photo"
             android:title="@string/prefPhoto"></Preference>
 
+        <Preference
+            android:id="@+id/notifications"
+            android:key="preference_notification"
+            android:title="@string/notification"></Preference>
 
     </PreferenceCategory>
 

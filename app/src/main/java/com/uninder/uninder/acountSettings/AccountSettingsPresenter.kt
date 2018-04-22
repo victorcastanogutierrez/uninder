@@ -20,6 +20,11 @@ interface AccountSettingsPresenter {
      */
     fun changePicture()
 
+
+    /***
+     *Goes to android notifications settings
+     */
+    fun goToNotificationSettings()
     /***
      *Saves the picture to firebase storage
      */

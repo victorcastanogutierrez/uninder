@@ -9,6 +9,11 @@ interface AccountSettingsView {
     fun startPictureIntent()
 
     /***
+     * Initialises the notifications intent
+     */
+    fun startNotificationsIntent()
+
+    /***
      * Retrieves the image data from the intent
      */
     fun showSuccessOnUploadPic()

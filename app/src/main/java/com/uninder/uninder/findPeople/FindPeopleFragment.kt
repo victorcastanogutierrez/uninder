@@ -32,7 +32,6 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     private lateinit var indeterminateDialog: Dialog
 
-    private lateinit var mNotificationHelper: NotificationHelper
 
     private var x1 = 0
 
@@ -51,7 +50,6 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
     }
 
     private fun initialize(uri: Uri, person: Person?) {
-        mNotificationHelper = NotificationHelper(this.context!!)
         addImage(uri.toString())
         addData(person)
         currentPerson = person
@@ -156,8 +154,6 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun onLike() {
 
-        mNotificationHelper.createNotification("MATCH con JC")
-
 
         /**
         addAnimation(likeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.like_button))
@@ -168,15 +164,12 @@ class FindPeopleFragment : Fragment(), FindPeopleView {
 
     override fun onDislike() {
 
-        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, "com.uninder.uninder")
-        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "default")
-        startActivity(intent)
-/*
+
+
         addAnimation(dislikeBtn, AnimationUtils.loadAnimation(this.activity, R.anim.dislike_button))
         presenterImpl.dislike(currentPerson)
         this.onDataLoaded()
-        */
+
     }
 
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.support.v7.preference.PreferenceScreen
@@ -16,6 +17,7 @@ private const val EDIT_NAME = "preference_name"
 private const val EDIT_DESC = "preference_desc"
 private const val CLOSE_SESSION = "preference_close_session"
 private const val CHANGE_PHOTO = "preference_change_photo"
+private const val NOTIFICATIONS = "preference_notification"
 
 private const val REQUEST_IMAGE_GET = 1
 
@@ -59,6 +61,7 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
 
             CLOSE_SESSION -> this.presenter.closeSession(listener)
             CHANGE_PHOTO -> this.presenter.changePicture()
+            NOTIFICATIONS -> this.presenter.goToNotificationSettings()
         }
 
         return super.onPreferenceTreeClick(preference)
@@ -76,6 +79,12 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), AccountSettingsView 
         return true
     }
 
+    override fun startNotificationsIntent() {
+        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, "com.uninder.uninder")
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "default")
+        startActivity(intent)
+    }
 
     override fun startPictureIntent() {
         val galleryIntent = Intent(Intent.ACTION_PICK,
